@@ -1,13 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { FC, useState } from "react";
-import Link from "next/link";
+import { CustomLink } from "../../CustomLink";
 import cn from "classnames";
 import OutsideClickHandler from "react-outside-click-handler";
 import styles from "./User.module.sass";
+import { Icon } from "../../Icon";
+import { Theme } from "../../Theme";
 import { TUser } from "./types";
-import { Icon } from "../../icon";
-import { Theme } from "../../theme";
-
 
 const items = [
   {
@@ -70,7 +69,7 @@ const User: FC<TUser> = ({ className }) => {
               <button
                 className={cn("button-stroke button-small", styles.button)}
               >
-                Manage fun on Coinbase
+                Manage fund on Coinbase
               </button>
             </div>
             <div className={styles.menu}>
@@ -79,6 +78,7 @@ const User: FC<TUser> = ({ className }) => {
                   x.url.startsWith("http") ? (
                     <a
                       className={styles.item}
+                      style={{ textDecoration: 'none' }}
                       href={x.url}
                       rel="noopener noreferrer"
                       key={index}
@@ -89,7 +89,7 @@ const User: FC<TUser> = ({ className }) => {
                       <div className={styles.text}>{x.title}</div>
                     </a>
                   ) : (
-                    <Link
+                    <CustomLink
                       className={styles.item}
                       href={x.url}
                       onClick={() => setVisible(!visible)}
@@ -99,7 +99,7 @@ const User: FC<TUser> = ({ className }) => {
                         <Icon name={x.icon} size="20" />
                       </div>
                       <div className={styles.text}>{x.title}</div>
-                    </Link>
+                    </CustomLink>
                   )
                 ) : (
                   <div className={styles.item} key={index}>

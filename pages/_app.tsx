@@ -3,7 +3,11 @@ import "../src/styles/app.sass";
 
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return  (
+    <>
+      <Component {...pageProps} />
+    </>
+  )
 }
 
 export default MyApp
