@@ -1,10 +1,10 @@
 import React, { FC, useState } from 'react';
 import cn from "classnames";
 import styles from "./Header.module.sass";
-import { User } from "./User";
-import { CustomLink } from '../CustomLink';
-import { Image } from "../Image";
-import { Icon } from "../Icon";
+import { User } from "./user";
+import { CustomLink } from '../customLink';
+import { Image } from "../image";
+import { Icon } from "../icon";
 
 const nav = [
     {

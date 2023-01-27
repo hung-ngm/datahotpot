@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import { FC, useState } from "react";
-import { CustomLink } from "../../CustomLink";
+import { CustomLink } from "../../customLink";
 import cn from "classnames";
 import OutsideClickHandler from "react-outside-click-handler";
 import styles from "./User.module.sass";
-import { Icon } from "../../Icon";
-import { Theme } from "../../Theme";
+import { Icon } from "../../icon";
+import { Theme } from "../../theme";
 import { TUser } from "./types";
 
 const items = [

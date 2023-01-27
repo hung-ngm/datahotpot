@@ -2378,6 +2378,7 @@ chokidar@3.5.3, "chokidar@>=3.0.0 <4.0.0", chokidar@^3.4.0, chokidar@^3.5.2:
   optionalDependencies:
     fsevents "~2.3.2"
 
+<<<<<<< HEAD
 chownr@^1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-1.1.4.tgz#6fc9d7b42d32a583596337666e7d08084da2cc6b"
@@ -2422,6 +2423,12 @@ classic-level@^1.2.0:
     module-error "^1.0.1"
     napi-macros "~2.0.0"
     node-gyp-build "^4.3.0"
+=======
+classname@^0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/classname/-/classname-0.0.0.tgz#43d171b484e354c7a293a5b78004df6852db20d6"
+  integrity sha512-kkhsspEJdUW+VhuvNzb2sQf0KbafDPfd36dB1qf03Uu42dWZwMQzaQuyNkaRr5ir0ZiAN0+TlH/EOOfwb/aaXg==
+>>>>>>> 9ea575fe9354623c50d6308c7c5c34c4c42f00ad
 
 classnames@^2.3.2:
   version "2.3.2"
@@ -6583,6 +6590,11 @@ react-dom@18.2.0:
   dependencies:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
+
+react-interpunct@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-interpunct/-/react-interpunct-1.0.4.tgz#6b7cd5646ac65daa07f106a8b62417cbbaa47c70"
+  integrity sha512-ezSLEgr3WYF+wYuFU66Gp3q6XgrYcz37UeCrgzR7/w6N9MsKwbvj7bZJDL8kjXGv5arLmIgwCBRqMiiF+m0QvA==
 
 react-is@^16.13.1:
   version "16.13.1"
