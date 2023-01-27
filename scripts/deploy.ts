@@ -1,18 +1,33 @@
+import * as fs from 'fs';
 import { ethers } from "hardhat";
+import "hardhat-deploy";
+import "hardhat-deploy-ethers";
+import * as dotenv from "dotenv";
+import { networkConfig, chainsIdConfig } from "../helper-hardhat-config";
+dotenv.config();
+
+const PRIVATE_KEY = process.env.PRIVATE_KEY || "";
+const wallet = new ethers.Wallet(PRIVATE_KEY, ethers.provider);
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-  const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
+    console.log("Wallet Ethereum Address:", wallet.address);
+    const chainId = chainsIdConfig["hyperspace"];
+    const tokensToBeMinted = networkConfig[chainId]["tokensToBeMinted"];
 
-  const lockedAmount = ethers.utils.parseEther("1");
+    //deploy Simplecoin
+    const SimpleCoin = await ethers.getContractFactory('SimpleCoin', wallet);
+    console.log('Deploying Simplecoin...');
+    const simpleCoin = await SimpleCoin.deploy(tokensToBeMinted);
+    await simpleCoin.deployed()
+    console.log('SimpleCoin deployed to:', simpleCoin.address);
 
-  const Lock = await ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
 
-  await lock.deployed();
+    const config = `
+      export const simpleCoinAddress = "${simpleCoin.address}"
+    `
 
-  console.log(`Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`);
+    const data = JSON.stringify(config)
+    fs.writeFileSync('cache/deploy.ts', JSON.parse(data))
 }
 
 // We recommend this pattern to be able to use async/await everywhere
