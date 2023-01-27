@@ -1,9 +1,9 @@
-import React, {FC, useState } from "react";
+import React, { FC, useState } from "react";
 import cn from "classnames";
-import { CustomLink } from "../CustomLink/index";
+import { CustomLink } from "../customLink/index";
 import {TCard} from './types';
 import styles from "./Card.module.sass";
-import { Icon } from "../Icon";
+import { Icon } from "../icon";
 import Interpunct from "react-interpunct";
 
 const Card: FC<TCard> = ({ className, item }) => {
