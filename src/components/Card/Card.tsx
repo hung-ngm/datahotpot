@@ -4,7 +4,7 @@ import { CustomLink } from "../CustomLink/index";
 import {TCard} from './types';
 import styles from "./Card.module.sass";
 import { Icon } from "../Icon";
-import Interpunct from "react-interpunct"
+import Interpunct from "react-interpunct";
 
 const Card: FC<TCard> = ({ className, item }) => {
   const [visible, setVisible] = useState(false);
@@ -14,22 +14,8 @@ const Card: FC<TCard> = ({ className, item }) => {
       <div className={styles.preview}>
         <img srcSet={`${item.image2x} 2x`} src={item.image} alt="Card" />
         <div className={styles.control}>
-          <div
-            className={cn(
-              { "status-green": item.category === "green" },
-              styles.category
-            )}
-          >
-            {item.categoryText}
-          </div>
-          <button
-            className={cn(styles.favorite, { [styles.active]: visible })}
-            onClick={() => setVisible(!visible)}
-          >
-            <Icon name="heart" size="20" />
-          </button>
           <button className={cn("button-small", styles.button)}>
-            <span>Place a bid</span>
+            <span>Buy</span>
             <Icon name="scatter-up" size="16" />
           </button>
         </div>
@@ -43,15 +29,6 @@ const Card: FC<TCard> = ({ className, item }) => {
           <div className={styles.line}/>
         </div>
         <div className={styles.foot}>
-          {/* <div className={styles.status}>
-            <Icon name="candlesticks-up" size="20" />
-            Highest bid <span>{item.highestBid}</span>
-          </div> */}
-          {/* <div
-            className={styles.bid}
-            dangerouslySetInnerHTML={{ __html: item.bid }}
-          /> */}
-        {/* <div className={styles.update}>Up</div> */}
             <div className = {styles.line2}>
                 <div className={styles.files}>1 file (CSV)</div>
                 <Interpunct> </Interpunct>
