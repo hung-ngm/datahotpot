@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { Layout } from '../src/components/Layout'
+import { Layout } from '../src/components/layout'
 import {Card} from "../src/components/Card";
 import { bids } from "../src/components/mock/bids";
 import styles from "../src/components/mock/card-test.module.sass";
