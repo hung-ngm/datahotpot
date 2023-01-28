@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { FC, useState } from "react";
 import cn from "classnames";
 import { CustomLink } from "../customLink/index";

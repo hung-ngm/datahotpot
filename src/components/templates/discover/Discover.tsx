@@ -104,7 +104,7 @@ const Search = () => {
         <div className={styles.wrapper}> 
             
             {categoryOptions.map((x, index) => (
-                <div className={styles.arow}>
+                <div key={index} className={styles.arow}>
                     <div className={styles.tag}>
                         <Icon name="lightning" size="20" />
                         <div>{x}</div>
