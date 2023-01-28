@@ -106,7 +106,7 @@ const Search = () => {
             {categoryOptions.map((x, index) => (
                 <div className={styles.arow}>
                     <div className={styles.tag}>
-                        <Icon name="candlesticks-up" size="20" />
+                        <Icon name="lightning" size="20" />
                         <div>{x}</div>
                     </div>
                     <Slider className="popular-slider" {...settings}>
