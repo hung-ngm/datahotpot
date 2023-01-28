@@ -8,7 +8,7 @@ import { Icon } from "../icon";
 
 const nav = [
     {
-      url: "/search01",
+      url: "/discover",
       title: "Discover",
     },
     {

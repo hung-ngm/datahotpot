@@ -91,7 +91,7 @@ export const bids = [
       avatar: "/images/content/avatar-3.jpg",
     },
     {
-      title: "Amazing digital art asdhadh s dshfsbfshfs fsfshfsfsh  vdshfs",
+      title: "Amazing digital art asdhadh",
       price: "2.45 ETH",
       highestBid: "0.001 ETH",
       counter: "3 in stock",
