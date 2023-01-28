@@ -12,12 +12,12 @@ const wallet = new ethers.Wallet(PRIVATE_KEY, ethers.provider);
 const main = async () => {
     console.log("Wallet Ethereum Address:", wallet.address);
       
-    const DatahotpotMarketplace = await ethers.getContractFactory("DatahotpotMarketplace");
+    const DatahotpotMarketplace = await ethers.getContractFactory("DatahotpotMarketplace", wallet);
     const datahotpotMarketplace = await DatahotpotMarketplace.deploy();
     await datahotpotMarketplace.deployed();
     console.log("---- DatahotpotMarketplace Contract deployed to: ---- ", datahotpotMarketplace.address);
 
-    const DataNFT = await ethers.getContractFactory("DataNFT");
+    const DataNFT = await ethers.getContractFactory("DataNFT", wallet);
     const dataNFT = await DataNFT.deploy(datahotpotMarketplace.address);
     await dataNFT.deployed();
     console.log("---- DataNFT Contract deployed to: ---- ", dataNFT.address);
