@@ -1,6 +1,6 @@
 export type TDrop = {
     className: string;
     value: string;
-    setValue: Function;
+    setValue: (value:string) => void;
     options: string[];
 }
