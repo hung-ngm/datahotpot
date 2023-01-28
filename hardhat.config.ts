@@ -9,7 +9,11 @@ import "solidity-coverage";
 import * as dotenv from "dotenv";
 dotenv.config();
 
+// private environment information
 const PRIVATE_KEY = process.env.PRIVATE_KEY || "";
+const ETHERSCAN = process.env.ETHERSCAN || "";
+const POLYGONSCAN = process.env.POLYGONSCAN || "";
+
 const config: HardhatUserConfig = {
   solidity: {
     compilers: [
@@ -31,7 +35,7 @@ const config: HardhatUserConfig = {
       accounts:
         PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
     },
-    mumbai: {
+    polygonMumbai: {
       url: process.env.MUMBAI_URL || "",
       accounts:
         PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
@@ -46,6 +50,12 @@ const config: HardhatUserConfig = {
       gasPrice: 8000000000
     },
   },
+  etherscan: {
+    apiKey: {
+      goerli: ETHERSCAN,
+      polygonMumbai: POLYGONSCAN,
+    }
+}
 
 };
 
