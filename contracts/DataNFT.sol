@@ -16,6 +16,19 @@ contract DataNFT is ERC721URIStorage, ERC721Royalty {
         marketplaceAddress = _marketplaceAddress;
     }
 
+    // Upload dataset -> get ipfs link
+    // URI contains link to the metadata json file
+    // metadata.json file contains
+    // name, context, list of files, categories, ...
+    // link
+
+    // json 
+    // metadata.json -> Upload to ipfs -> link
+    // { "name": "", ""}
+    // fetch api from link -> get json
+
+    // _tokenURI = { "dataset": "link to ipfs url uploaded", "metadata": "link to ipfs json file" }
+
     function createToken(string memory _tokenURI, uint96 _feeNumerator) public returns (uint256) {
         _tokenIds.increment();
 
