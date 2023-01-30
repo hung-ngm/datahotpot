@@ -5,6 +5,7 @@ import { User } from "./user";
 import { CustomLink } from '../customLink';
 import { Image } from "../image";
 import { Icon } from "../icon";
+import { Dropdown } from '../dropdown';
 
 const nav = [
     {
@@ -15,19 +16,21 @@ const nav = [
       url: "/issues",
       title: "Issues",
     },
-    {
-      url: "/item",
-      title: "Create item",
-    },
-    {
-      url: "/profile",
-      title: "Profile",
-    },
+    // {
+    //   url: "/create/dataset",
+    //   title: "Create",
+    // },
+    // {
+    //   url: "/profile",
+    //   title: "Profile",
+    // },
 ];
 
 const Header: FC = () => {
-    const [visibleNav, setVisibleNav] = useState(false);
+  const [visibleNav, setVisibleNav] = useState(false);
   const [search, setSearch] = useState("");
+  const uploadTypeOptions = ["Dataset", "Issue"];
+  const [uploadType, setUploadType] = useState(uploadTypeOptions[0]);
 
   const handleSubmit = (e: React.FormEvent<HTMLElement>) => {
     alert();
@@ -41,7 +44,7 @@ const Header: FC = () => {
             className={styles.pic}
             src="/images/logo-dark.png"
             srcDark="/images/logo-light.png"
-            alt="Fitness Pro"
+            alt="Datahotpot"
           />
         </CustomLink>
         <div className={cn(styles.wrapper, { [styles.active]: visibleNav })}>
@@ -49,7 +52,7 @@ const Header: FC = () => {
             {nav.map((x, index) => (
               <CustomLink
                 className={styles.link}
-                // activeClassName={styles.active}
+                //activeClassName={styles.active}
                 href={x.url}
                 key={index}
               >
@@ -75,12 +78,6 @@ const Header: FC = () => {
               <Icon name="search" size="20" />
             </button>
           </form>
-          <CustomLink
-            className={cn("button-small", styles.button)}
-            href="/upload-variants"
-          >
-            Upload
-          </CustomLink>
         </div>
         <CustomLink
           className={cn("button-small", styles.button)}
