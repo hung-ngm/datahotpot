@@ -15,6 +15,24 @@
     "jsx": "preserve",
     "incremental": true
   },
+  "baseUrl": ".",
+  "paths": {
+    "@cache/*": [
+      "cache/*"
+    ],
+    "@styles/*": [
+      "src/styles/*"
+    ],
+    "@components/*": [
+      "src/components/*"
+    ],
+    "@artifacts/*": [
+      "artifacts/*"
+    ],
+    "@pages/*": [
+      "pages/*"
+    ],
+  },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "deploy/00_deploy.js"],
   "exclude": ["node_modules"]
 }

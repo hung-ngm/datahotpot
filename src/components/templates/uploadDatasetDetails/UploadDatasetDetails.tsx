@@ -10,11 +10,19 @@ import {Modal} from "../../modules/modal";
 import {Preview} from "../../modules/preview";
 import {Select} from "../../modules/select";
 import {FollowSteps} from "../../modules/followSteps";
-import { SelectOption } from "./types";
+import { SelectOption, TRoyaltiesMap } from "./types";
 import { deployEncrypted } from "../../../../utils/lighthouse/upload";
 import { storeMetadata } from "../../../../utils/web3Storage/storeMetadata";
+import { createDataNFT } from "../../../../pages/api/contracts/createDataNFT";
 
 const royaltiesOptions = ["2%", "5%", "10%"];
+
+// Use number in Solidity smart contracts
+const royaltiesMap: TRoyaltiesMap = {
+  "2%": 200,
+  "5%": 500,
+  "10%": 1000,
+}
 
 const options = [
   { label: "Music", value: 1 },
@@ -25,7 +33,7 @@ const options = [
 ]
 
 const UploadDatasetDetails:FC = () => {
-  const [royalties, setRoyalties] = useState(royaltiesOptions[0]);
+  const [royalties, setRoyalties] = useState<string>(royaltiesOptions[0]);
   const [dataName, setDataName] = useState<string>("");
   const [dataContext, setDataContext] = useState<string>("");
   const [dataContains, setDataContains] = useState<string>("");
@@ -60,6 +68,11 @@ const UploadDatasetDetails:FC = () => {
     console.log('Store metadata with url', metadataUrl);
     if (metadataUrl) {
       setMetadataUrl(metadataUrl);
+    }
+    // Create Data Contract
+    if (dataUrl && metadataUrl && royalties) {
+      const res = await createDataNFT(dataUrl, metadataUrl, royaltiesMap[royalties]);
+      console.log('Create Data Contract successfully ?', res);
     }
   }
 
