@@ -8,7 +8,7 @@ const TextArea:FC<TText> = ({ className, label, ...props }) => {
     <div className={cn(styles.field, className)}>
       {label && <div className={styles.label}>{label}</div>}
       <div className={styles.wrap}>
-        <textarea className={styles.input} {...props} />
+        <textarea className={styles.textarea} {...props} />
       </div>
     </div>
   );
