@@ -6,10 +6,10 @@ import {Icon} from "../../modules/icon";
 import {TextInput} from "../../modules/textInput";
 import {TextArea} from "../../modules/textArea";
 import {Loader} from "../../modules/loader";
-//import {Modal} from "../../modules/modal/Modal";
+import {Modal} from "../../modules/modal";
 import {Preview} from "../../modules/preview";
 import {Select} from "../../modules/select";
-//import FolowSteps from "./FolowSteps";
+import {FollowSteps} from "../../modules/followSteps";
 import { SelectOption } from "./types";
 import { deployEncrypted } from "../../../../utils/lighthouse/upload";
 import { storeMetadata } from "../../../../utils/web3Storage/storeMetadata";
@@ -205,9 +205,9 @@ const UploadDatasetDetails:FC = () => {
           />
         </div>
       </div>
-      {/* <Modal visible={visibleModal} onClose={() => setVisibleModal(false)}>
-        <FolowSteps className={styles.steps} />
-      </Modal> */}
+      <Modal visible={visibleModal} onClose={() => setVisibleModal(false)}>
+        <FollowSteps className={styles.steps} />
+      </Modal>
     </>
   );
 };
