@@ -53,3 +53,16 @@ declare module 'use-dark-mode' {
       config?: DarkModeConfig
     ): DarkMode;
   }
+
+declare module 'body-scroll-lock' {
+  export interface BodyScrollOptions {
+    reserveScrollBarGap?: boolean | undefined;
+    allowTouchMove?: ((el: HTMLElement | Element) => boolean) | undefined;
+  }
+
+  export function disableBodyScroll(targetElement: null | Element, options?: BodyScrollOptions): void;
+  export function enableBodyScroll(targetElement: HTMLElement | Element): void;
+  export function clearAllBodyScrollLocks(): void;
+
+  export as namespace bodyScrollLock;
+}
