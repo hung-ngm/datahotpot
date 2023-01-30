@@ -4,7 +4,6 @@ import styles from "./Discover.module.sass";
 import { Range, getTrackBackground } from "react-range";
 import { Icon } from "../../modules/icon";
 import { Card } from "../../modules/card";
-import { Dropdown } from "../../modules/dropdown";
 import Slider from "react-slick";
 import { TSlide } from "./types";
 

@@ -5,7 +5,6 @@ import { User } from "./user";
 import { CustomLink } from '../customLink';
 import { Image } from "../image";
 import { Icon } from "../icon";
-import { Dropdown } from '../dropdown';
 
 const nav = [
     {
