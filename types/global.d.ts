@@ -52,4 +52,10 @@ declare module 'use-dark-mode' {
       initialState?: boolean,
       config?: DarkModeConfig
     ): DarkMode;
+}
+
+declare global {
+  interface Window {
+    ethereum: import('ethers').providers.ExternalProvider;
   }
+}
