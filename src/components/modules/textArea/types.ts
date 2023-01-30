@@ -4,5 +4,7 @@ export type TText = {
     name: string,
     type: string,
     placeholder: string
-    required: boolean
+    required: boolean,
+    value: string,
+    onChange?: (e: any) => void
 }
