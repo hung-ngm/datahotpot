@@ -17,20 +17,22 @@ const nav = [
       url: "/issues",
       title: "Issues",
     },
-    {
-      url: "/item",
-      title: "Create item",
-    },
-    {
-      url: "/profile",
-      title: "Profile",
-    },
+    // {
+    //   url: "/create/dataset",
+    //   title: "Create",
+    // },
+    // {
+    //   url: "/profile",
+    //   title: "Profile",
+    // },
 ];
 
 const Header: FC = () => {
   const [visibleNav, setVisibleNav] = useState(false);
   const [search, setSearch] = useState("");
   const { data: session } = useSession();
+  const uploadTypeOptions = ["Dataset", "Issue"];
+  const [uploadType, setUploadType] = useState(uploadTypeOptions[0]);
 
   const handleSubmit = (e: React.FormEvent<HTMLElement>) => {
     alert();
@@ -44,7 +46,7 @@ const Header: FC = () => {
             className={styles.pic}
             src="/images/logo-dark.png"
             srcDark="/images/logo-light.png"
-            alt="Fitness Pro"
+            alt="Datahotpot"
           />
         </CustomLink>
         <div className={cn(styles.wrapper, { [styles.active]: visibleNav })}>
@@ -52,7 +54,7 @@ const Header: FC = () => {
             {nav.map((x, index) => (
               <CustomLink
                 className={styles.link}
-                // activeClassName={styles.active}
+                //activeClassName={styles.active}
                 href={x.url}
                 key={index}
               >
