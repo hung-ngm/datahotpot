@@ -45,3 +45,6 @@ typechain-types
 # Hardhat files
 cache
 artifacts
+
+# sample
+/sample
