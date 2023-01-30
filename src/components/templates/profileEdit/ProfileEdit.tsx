@@ -68,6 +68,7 @@ const ProfileEdit:FC = () => {
                       label="display name"
                       name="Name"
                       type="text"
+                      value="name"
                       placeholder="Enter your display name"
                       required
                     />
@@ -76,6 +77,7 @@ const ProfileEdit:FC = () => {
                       label="Custom url"
                       name="Url"
                       type="text"
+                      value="Url"
                       placeholder="ui8.net/Your custom URL"
                       required
                     />
@@ -86,6 +88,7 @@ const ProfileEdit:FC = () => {
                       type="text"
                       placeholder="About yourselt in a few words"
                       required
+                      value="Bio"
                     />
                   </div>
                 </div>
@@ -97,6 +100,7 @@ const ProfileEdit:FC = () => {
                       label="portfolio or website"
                       name="Portfolio"
                       type="text"
+                      value="Portfolio"
                       placeholder="Enter URL"
                       required
                     />
@@ -106,6 +110,7 @@ const ProfileEdit:FC = () => {
                         label="twitter"
                         name="Twitter"
                         type="text"
+                        value="Twitter"
                         placeholder="@twitter username"
                         required
                       />
@@ -129,7 +134,7 @@ const ProfileEdit:FC = () => {
               </div>
               <div className={styles.note}>
                 To update your settings you should sign message through your
-                wallet. Click 'Update profile' then sign the message
+                wallet. Click Update profile then sign the message
               </div>
               <div className={styles.btns}>
                 <button className={cn("button", styles.button)}>

@@ -75,13 +75,11 @@ contract DataNFT is ERC721URIStorage, ERC721Royalty {
 
     function getDataUrl(uint256 tokenId) public view returns (string memory) {
         // Only owner of this contract can do this function
-
         require(ownerOf(tokenId) == msg.sender, "Only token owner can get data url");
         return _dataUrl;
     }
 
     function getMetadata() public view returns (string memory) {
-        // Only owner of this contract can do this function
         return _metadata;
     }
 
