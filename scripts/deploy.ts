@@ -17,20 +17,14 @@ const main = async () => {
     await datahotpotMarketplace.deployed();
     console.log("---- DatahotpotMarketplace Contract deployed to: ---- ", datahotpotMarketplace.address);
 
-    const DataNFT = await ethers.getContractFactory("DataNFT", wallet);
-    const dataNFT = await DataNFT.deploy(datahotpotMarketplace.address);
-    await dataNFT.deployed();
-    console.log("---- DataNFT Contract deployed to: ---- ", dataNFT.address);
-
     // verify deployed contracts
     const delay = (ms: number | undefined) => new Promise(res => setTimeout(res, ms));
     await delay(20000);
     console.log("200 second wait for deploy TX's to propogate to block explorer before verification");
-    await verifyEtherscan(datahotpotMarketplace.address, dataNFT.address);
+    await verifyEtherscan(datahotpotMarketplace.address);
 
     const config = `
       export const datahotpotMarketplaceAddress = "${datahotpotMarketplace.address}"
-      export const dataNFTAddress = "${dataNFT.address}"
     `
     const data = JSON.stringify(config)
     fs.writeFileSync('cache/deploy.ts', JSON.parse(data))
@@ -53,7 +47,7 @@ const alreadyVerified = (err: string) => {
  * @param {string} datahotpotMarketplaceAddress - the address of the deployed datahotpotMarketplace contract
  * @param {string} dataNFTAddress - the address of the deployed dataNFT contract
  */
-const verifyEtherscan = async (datahotpotMarketplaceAddress: string, dataNFTAddress: string) => {
+const verifyEtherscan = async (datahotpotMarketplaceAddress: string) => {
   // check if supported network
   const chainId = ethers.provider._network.chainId
   const chains = [[1], [137, 80001]]
@@ -74,15 +68,6 @@ const verifyEtherscan = async (datahotpotMarketplaceAddress: string, dataNFTAddr
   } catch (e: any) {
       if (!alreadyVerified(e.toString())) throw new Error(WAIT_ERR)
       else console.log('=-=-=-=-=\nDatahotpotMarketplace.sol already verified\n=-=-=-=-=')
-  }
-  try {
-      await hre.run('verify:verify', { 
-        address: dataNFTAddress,
-        constructorArguments: [datahotpotMarketplaceAddress]
-       })
-  } catch (e: any) {
-      if (!alreadyVerified(e.toString())) throw new Error(WAIT_ERR)
-      else console.log('=-=-=-=-=\nDataNFT.sol already verified\n=-=-=-=-=')
   }
 }
 

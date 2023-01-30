@@ -1,10 +1,12 @@
 import React, { FC, useState } from 'react';
 import cn from "classnames";
 import styles from "./Header.module.sass";
+import Link from "next/link";
 import { User } from "./user";
 import { CustomLink } from '../customLink';
 import { Image } from "../image";
 import { Icon } from "../icon";
+import { useSession } from "next-auth/react";
 
 const nav = [
     {
@@ -28,6 +30,7 @@ const nav = [
 const Header: FC = () => {
   const [visibleNav, setVisibleNav] = useState(false);
   const [search, setSearch] = useState("");
+  const { data: session } = useSession();
   const uploadTypeOptions = ["Dataset", "Issue"];
   const [uploadType, setUploadType] = useState(uploadTypeOptions[0]);
 
@@ -77,20 +80,27 @@ const Header: FC = () => {
               <Icon name="search" size="20" />
             </button>
           </form>
+          
         </div>
-        <CustomLink
-          className={cn("button-small", styles.button)}
-          href="/upload-variants"
-        >
-          Upload
-        </CustomLink>
-        {/* <Link
-          className={cn("button-stroke button-small", styles.button)}
-          to="/connect-wallet"
-        >
-          Connect Wallet
-        </Link> */}
-        <User className={styles.user} />
+        {(session && session.user) ? (
+          <>
+            <CustomLink
+              className={cn("button-small", styles.button)}
+              href="/upload-variants"
+            >
+              Upload
+            </CustomLink>
+            <User className={styles.user} />
+          </>
+        ) : (
+          <Link
+            className={cn("button-stroke button-small", styles.button)}
+            href="/login"
+          >
+            Connect
+          </Link>
+        )}
+        
         <button
           className={cn(styles.burger, { [styles.active]: visibleNav })}
           onClick={() => setVisibleNav(!visibleNav)}

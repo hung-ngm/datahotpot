@@ -7,6 +7,9 @@ import styles from "./User.module.sass";
 import { Icon } from "../../icon";
 import { Theme } from "../../theme";
 import { TUser } from "./types";
+import { signOut, useSession } from "next-auth/react";
+import { useDisconnect } from "wagmi";
+import { walletAddressShorterner } from "../../../../../utils/walletAddressShorterner";
 
 const items = [
   {
@@ -21,16 +24,19 @@ const items = [
   {
     title: "Disconnect",
     icon: "exit",
-    url: "https://ui8.net/ui8/products/crypter-nft-marketplace-ui-kit",
+    url: "/api/auth/signout",
   },
 ];
 
 const User: FC<TUser> = ({ className }) => {
   const [visible, setVisible] = useState(false);
+  const { data: session } = useSession();
+  const { disconnect } = useDisconnect();
 
   return (
     <OutsideClickHandler onOutsideClick={() => setVisible(false)}>
-      <div className={cn(styles.user, className)}>
+      {session?.user && (
+        <div className={cn(styles.user, className)}>
         <div className={styles.head} onClick={() => setVisible(!visible)}>
           <div className={styles.avatar}>
             <img src="/images/content/avatar-user.jpg" alt="Avatar" />
@@ -43,7 +49,7 @@ const User: FC<TUser> = ({ className }) => {
           <div className={styles.body}>
             <div className={styles.name}>Enrico Cole</div>
             <div className={styles.code}>
-              <div className={styles.number}>0xc4c16ab5ac7d...b21a</div>
+              <div className={styles.number}>{walletAddressShorterner(session.user.name)}</div>
               <button className={styles.copy}>
                 <Icon name="copy" size="16" />
               </button>
@@ -70,12 +76,17 @@ const User: FC<TUser> = ({ className }) => {
             <div className={styles.menu}>
               {items.map((x, index) =>
                 x.url ? (
-                  x.url.startsWith("http") ? (
+                  x.url.startsWith("/api") ? (
                     <a
                       className={styles.item}
                       style={{ textDecoration: 'none' }}
                       href={x.url}
                       rel="noopener noreferrer"
+                      onClick={(e) => {
+                        e.preventDefault()
+                        disconnect()
+                        signOut()
+                      }}
                       key={index}
                     >
                       <div className={styles.icon}>
@@ -110,6 +121,7 @@ const User: FC<TUser> = ({ className }) => {
           </div>
         )}
       </div>
+      )}
     </OutsideClickHandler>
   );
 };

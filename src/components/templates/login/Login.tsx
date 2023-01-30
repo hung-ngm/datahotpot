@@ -1,11 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import cn from "classnames";
 import styles from "./Login.module.sass";
 import { Icon } from "../../modules/icon";
 import { WalletIcon } from "../../modules/walletIcon";
 import { Checkbox } from "../../modules/checkbox";
+import { getCsrfToken, signIn, useSession } from "next-auth/react";
+import { SiweMessage } from "siwe";
+import { useAccount, useConnect, useNetwork, useSignMessage } from "wagmi";
+import { InjectedConnector } from 'wagmi/connectors/injected';
 
 const menu = [
   {
@@ -19,8 +23,46 @@ const menu = [
 ];
 
 const Connect = () => {
-  const [age, setAge] = useState(true);
-  const [conditions, setConditions] = useState(false);
+    const { signMessageAsync } = useSignMessage();
+    const { chain } = useNetwork();
+    const { address, isConnected } = useAccount();
+    const { connect } = useConnect({
+        connector: new InjectedConnector(),
+    });
+    const { data: session, status } = useSession();
+
+    const handleLogin = async () => {
+      try {
+        const callbackUrl = "/"
+        const message = new SiweMessage({
+          domain: window.location.host,
+          address: address,
+          statement: "Sign in with Ethereum to the app.",
+          uri: window.location.origin,
+          version: "1",
+          chainId: chain?.id,
+          nonce: await getCsrfToken(),
+        })
+        const signature = await signMessageAsync({
+          message: message.prepareMessage(),
+        })
+        signIn("credentials", {
+          message: JSON.stringify(message),
+          redirect: true,
+          signature,
+          callbackUrl,
+        })
+      } catch (error) {
+        window.alert(error)
+      }
+    }
+    
+    useEffect(() => {
+      console.log(isConnected);
+      if (isConnected && !session) {
+        handleLogin()
+      }
+    }, [isConnected, session])
 
   return (
     <div className={cn("section-pt80", styles.section)}>
@@ -37,12 +79,21 @@ const Connect = () => {
               <div
                 className={cn({ [styles.active]: index === 1 }, styles.link)}
                 key={index}
+                onClick={(e) => {
+                  console.log("event", e);
+                  e.preventDefault();
+                  if (!isConnected) {
+                    connect();
+                  } else {
+                    handleLogin();
+                  }
+                }}
               >
                 <div
                   className={styles.icon}
                   style={{ backgroundColor: x.color }}
                 >
-                  <WalletIcon name="metamask" size="40" fill={x.color} />
+                  <WalletIcon name="metamask" size="40" fill={x.color} />    
                   <Icon name="check" size="18" fill={x.color} />
                 </div>
                 <span>{x.title}</span>
