@@ -13,7 +13,11 @@ const Card: FC<TCard> = ({ className, item }) => {
   return (
     <div className={cn(styles.card, className)}>
       <div className={styles.preview}>
-        <img srcSet={`${item.image2x} 2x`} src={item.image} alt="Card" />
+        <img 
+          srcSet={`/images/content/card-pic-1@2x.jpg 2x`} 
+          src="/images/content/card-pic-1.jpg" 
+          alt="Card" 
+        />
         <div className={styles.control}>
           <button className={cn("button-small", styles.button)}>
             <span>Buy</span>
@@ -21,22 +25,22 @@ const Card: FC<TCard> = ({ className, item }) => {
           </button>
         </div>
       </div>
-      <CustomLink className={styles.link} href={item.url}>
+      <CustomLink className={styles.link} href="/">
         <div className={styles.body}>
           <div className={styles.line}>
-            <div className={styles.title}>{item.title}</div>
-            <div className={styles.price}>{item.price}</div>
+            <div className={styles.title}>{item.name}</div>
+            <div className={styles.price}>{item.price} FIL</div>
           </div>
           <div className={styles.line}/>
         </div>
         <div className={styles.foot}>
             <div className = {styles.line2}>
                 <div className={styles.files}>1 file (CSV)</div>
-                <Interpunct> </Interpunct>
+                <Interpunct></Interpunct>
                 <div className={styles.limitSize}>3 MB</div>
             </div>
             <div className={styles.avatar}>
-                <img src={item.avatar} alt="Avatar" />
+                <img src="/images/content/avatar-1.jpg" alt="Avatar" />
             </div> 
         </div>
       </CustomLink>
