@@ -49,7 +49,9 @@ const User: FC<TUser> = ({ className }) => {
           <div className={styles.body}>
             <div className={styles.name}>Enrico Cole</div>
             <div className={styles.code}>
-              <div className={styles.number}>{walletAddressShorterner(session.user.name)}</div>
+              <div className={styles.number}>
+                {walletAddressShorterner(session.user.name)}
+              </div>
               <button className={styles.copy}>
                 <Icon name="copy" size="16" />
               </button>

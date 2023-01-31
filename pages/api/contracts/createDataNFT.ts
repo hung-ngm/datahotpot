@@ -5,9 +5,10 @@ import { datahotpotMarketplaceAddress } from '../../../utils/addresses';
 
 import DataNFT from '../../../abis/DataNFT.json';
 
-import { mintDataNFT } from './mintDataNFT';
-
-export const createDataNFT = async (dataUrl: string, metadata: string, feeNumerator: number) => {
+export const createDataNFT = async (
+    dataUrl: string, 
+    metadata: string, 
+) : Promise<string> => {
     try {
         const web3Modal = new Web3Modal();
         const connection = await web3Modal.connect();
@@ -29,13 +30,11 @@ export const createDataNFT = async (dataUrl: string, metadata: string, feeNumera
         await dataContract.deployed();
         console.log('Contract deployed to address', dataContract.address)
         
-        // Then mint the 1st NFT to the owner
-        const minted = await mintDataNFT(dataContract.address, feeNumerator);
-        console.log('minted: ', minted);
+      
 
-        return true;
+        return dataContract.address;
     } catch (err) {
         console.log(err);
-        return false;
+        return "";
     }
 }
