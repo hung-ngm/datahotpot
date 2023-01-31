@@ -3,7 +3,10 @@ import Web3Modal from 'web3modal';
 
 import DataNFT from '../../../abis/DataNFT.json';
 
-export const mintDataNFT = async (nftAddress: string, feeNumerator: number) => {
+export const mintDataNFT = async (
+    nftAddress: string, 
+    feeNumerator: number
+) : Promise<number> => {
     try {
         const web3Modal = new Web3Modal();
         const connection = await web3Modal.connect();
@@ -20,10 +23,11 @@ export const mintDataNFT = async (nftAddress: string, feeNumerator: number) => {
         const resTx = await tx.wait();
         const [transferEvent] = resTx.events;
         const { tokenId } = transferEvent.args;
-        console.log('new token id created: ', tokenId);
-        return true;
+        console.log('New token id created', tokenId);
+        return tokenId.toNumber();
 
     } catch (err) {
         console.error(err);
+        return -1;
     }
 }

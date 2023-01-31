@@ -13,7 +13,6 @@ import {FollowSteps} from "../../modules/followSteps";
 import { SelectOption, TRoyaltiesMap } from "./types";
 import { deployEncrypted } from "../../../../utils/lighthouse/upload";
 import { storeMetadata } from "../../../../utils/web3Storage/storeMetadata";
-import { createDataNFT } from "../../../../pages/api/contracts/createDataNFT";
 
 const royaltiesOptions = ["2%", "5%", "10%"];
 
@@ -68,11 +67,6 @@ const UploadDatasetDetails:FC = () => {
     console.log('Store metadata with url', metadataUrl);
     if (metadataUrl) {
       setMetadataUrl(metadataUrl);
-    }
-    // Create Data Contract
-    if (dataUrl && metadataUrl && royalties) {
-      const res = await createDataNFT(dataUrl, metadataUrl, royaltiesMap[royalties]);
-      console.log('Create Data Contract successfully ?', res);
     }
   }
 
@@ -219,7 +213,13 @@ const UploadDatasetDetails:FC = () => {
         </div>
       </div>
       <Modal visible={visibleModal} onClose={() => setVisibleModal(false)}>
-        <FollowSteps className={styles.steps} />
+        <FollowSteps
+          className={styles.steps}
+          dataUrl={dataUrl}
+          metadata={metadataUrl}
+          feeNumerator={royaltiesMap[royalties]}
+          price={Number(price)}
+        />
       </Modal>
     </>
   );
