@@ -1,0 +1,1 @@
+export const datahotpotMarketplaceAddress = "0x5bA2A3E33D4C04FF5458e583c0d5E6d3B9931278";

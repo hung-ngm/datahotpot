@@ -1,9 +1,7 @@
 import { ethers } from 'ethers'
 import Web3Modal from 'web3modal';
 
-import { datahotpotMarketplaceAddress } from '../../../cache/deploy';
-
-import DataNFT from '../../../artifacts/contracts/DataNFT.sol/DataNFT.json';
+import DataNFT from '../../../abis/DataNFT.json';
 
 export const mintDataNFT = async (nftAddress: string, feeNumerator: number) => {
     try {
