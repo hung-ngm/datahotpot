@@ -5,7 +5,7 @@ import { Range, getTrackBackground } from "react-range";
 import { Icon } from "../../modules/icon";
 import { Card } from "../../modules/card";
 import Slider from "react-slick";
-import { TSlide } from "./types";
+import { TSlide, IDiscovery } from "./types";
 
 // data
 import { bids } from "../../mock/bids";
@@ -18,7 +18,7 @@ const likesOptions = ["Most liked", "Least liked"];
 const categoryOptions = ["All Category", "Music", "University", "Entertainment", "Science"];
 const creatorOptions = ["Verified only", "All", "Most liked"];
 
-const Search = () => {
+const Discovery: FC<IDiscovery> = ({ dataNFTs }) => {
   const [date, setDate] = useState(dateOptions[0]);
   const [likes, setLikes] = useState(likesOptions[0]);
   const [category, setCategory] = useState(categoryOptions[0]);
@@ -109,8 +109,12 @@ const Search = () => {
                         <div>{x}</div>
                     </div>
                     <Slider className="popular-slider" {...settings}>
-                        {bids.map((x, index) => (
-                            <Card className={styles.card} item={x} key={index} />
+                        {dataNFTs?.map((x, index) => (
+                            <Card 
+                              className={styles.card} 
+                              item={x} 
+                              key={index} 
+                            />
                         ))}
                     </Slider>
                 </div>
@@ -126,4 +130,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default Discovery;

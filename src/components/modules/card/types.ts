@@ -4,12 +4,13 @@ export type TCard = {
 }
 
 export type TC = {
-    title: string,
-    price: string,
-    image: string,
-    image2x: string,
-    category: string,
-    categoryText: string,
-    url: string,
-    avatar: string
+    price: string;
+    tokenId: number;
+    seller: string;
+    owner: string;
+    name: string;
+    context: string;
+    sources: string;
+    tags: string[];
+    itemId: number;
 }
