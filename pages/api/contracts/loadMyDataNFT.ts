@@ -6,14 +6,14 @@ import { datahotpotMarketplaceAddress } from '../../../utils/addresses';
 import DataNFT from '../../../abis/DataNFT.json';
 import DatahotpotMarketplace from '../../../abis/DatahotpotMarketplace.json';
 
-export const loadDataNFTs = async () => {
+export const loadMyDataNFTs = async (address: string) => {
     const provider = new ethers.providers.JsonRpcProvider("https://api.hyperspace.node.glif.io/rpc/v1");
     const marketContract = new ethers.Contract(
        datahotpotMarketplaceAddress, 
        DatahotpotMarketplace.abi, 
        provider
     );
-    const data = await marketContract.fetchMarketItems();
+    const data = await marketContract.fetchNFTsByAddress(address);
 
     const items = await Promise.all(data.map(async (i: any) => {        
         const nftContract = new ethers.Contract(

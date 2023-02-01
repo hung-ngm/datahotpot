@@ -5,6 +5,13 @@ import { loadDataNFTs } from './api/contracts/loadDataNFTs';
 import { IDiscovery } from '../src/components/templates/discover/types';
 
 const DiscoverPage: NextPage<IDiscovery> = (props) => {
+    const loadNFTs = async () => {
+        const items = await loadDataNFTs();
+        console.log('items', items);
+    }
+
+    loadNFTs();
+
     return (
         <Layout>
             <Discover {...props} />
@@ -14,7 +21,7 @@ const DiscoverPage: NextPage<IDiscovery> = (props) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const items = await loadDataNFTs();
-  
+
     return {
       props: {
         dataNFTs: items,
