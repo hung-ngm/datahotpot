@@ -31,7 +31,10 @@ export const loadDataNFTs = async () => {
 
         console.log('metadata', metadata);
         const wei = ethers.utils.formatUnits(i.price.toString(), 'wei');
+        console.log('price when fetching', i.price);
+
         const item = {
+            contract: i.nftContract,
             price: (Number(wei)).toString(),
             tokenId: i.tokenId.toNumber(),
             seller: i.seller,

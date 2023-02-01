@@ -5,13 +5,6 @@ import { loadDataNFTs } from './api/contracts/loadDataNFTs';
 import { IDiscovery } from '../src/components/templates/discover/types';
 
 const DiscoverPage: NextPage<IDiscovery> = (props) => {
-    const loadNFTs = async () => {
-        const items = await loadDataNFTs();
-        console.log('items', items);
-    }
-
-    loadNFTs();
-
     return (
         <Layout>
             <Discover {...props} />

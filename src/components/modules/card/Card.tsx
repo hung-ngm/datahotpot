@@ -2,13 +2,19 @@
 import React, { FC, useState } from "react";
 import cn from "classnames";
 import { CustomLink } from "../customLink/index";
-import {TCard} from './types';
+import {TCard, TC} from './types';
 import styles from "./Card.module.sass";
 import { Icon } from "../icon";
 import Interpunct from "react-interpunct";
+import { buyNFT } from "../../../../pages/api/contracts/buyNFT";
 
 const Card: FC<TCard> = ({ className, item }) => {
   const [visible, setVisible] = useState(false);
+
+  const handleBuyItem = async (item: TC) => {
+    const res = await buyNFT(item);
+    console.log('buy res', res);
+  }
 
   return (
     <div className={cn(styles.card, className)}>
@@ -19,7 +25,10 @@ const Card: FC<TCard> = ({ className, item }) => {
           alt="Card" 
         />
         <div className={styles.control}>
-          <button className={cn("button-small", styles.button)}>
+          <button 
+            className={cn("button-small", styles.button)}
+            onClick={async () => { await handleBuyItem(item) }}
+          >
             <span>Buy</span>
             <Icon name="scatter-up" size="16" />
           </button>

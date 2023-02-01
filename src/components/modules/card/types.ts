@@ -1,9 +1,10 @@
 export type TCard = {
     className: string;
-    item: TC
+    item: TC;
 }
 
 export type TC = {
+    contract: string;
     price: string;
     tokenId: number;
     seller: string;
