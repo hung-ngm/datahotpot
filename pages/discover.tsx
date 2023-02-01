@@ -21,7 +21,7 @@ const DiscoverPage: NextPage<IDiscovery> = (props) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const items = await loadDataNFTs();
-  
+
     return {
       props: {
         dataNFTs: items,

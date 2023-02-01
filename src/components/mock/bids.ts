@@ -83,6 +83,7 @@
 
 export const bids = [
   {
+    contract: "0x877A1FD462e105b8B7c599E53DE63eacB34CD77d",
     contains: "chatgpt1.csv",
     context: "This dataset contains a collection of tweets with the hashtag #chatgpt. The tweets were scraped from Twitter and cover a range of topics related to the ChatGPT language model. The dataset includes the following information for each tweet:\n\n- Tweet text\n- User information (username, user ID, location, etc.)\n- Tweet timestamp\n- Retweet and favorite count\n- Hashtags used in the tweet\n- URLs\n\nThe dataset provides a glimpse into the online conversation surrounding the ChatGPT language model and can be used for various natural language processing and machine learning tasks, such as sentiment analysis, topic modeling, and more. It allows understanding the community, the level of interest, and the use of chatGPT.",
     itemId: 1,

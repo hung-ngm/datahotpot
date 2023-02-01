@@ -7,11 +7,8 @@ import { Card } from "../../modules/card";
 import Slider from "react-slick";
 import { TSlide, IDiscovery } from "./types";
 
-// data
-import { bids } from "../../mock/bids";
-
 const SlickArrow: FC<TSlide> = ({children, ...props }) => (
-    <button {...props}>{children}</button>
+  <button {...props}>{children}</button>
 );
 const dateOptions = ["Newest", "Oldest"];
 const likesOptions = ["Most liked", "Least liked"];

@@ -3,6 +3,7 @@ export type TSlide = {
 }
 
 export type TNFTItem =  {
+    contract: string;
     price: string;
     tokenId: number;
     seller: string;
