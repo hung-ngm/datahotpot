@@ -16,6 +16,8 @@ const Card: FC<TCard> = ({ className, item }) => {
     console.log('buy res', res);
   }
 
+  const href:string = "/item-details/" + item.itemId;
+
   return (
     <div className={cn(styles.card, className)}>
       <div className={styles.preview}>
@@ -32,9 +34,18 @@ const Card: FC<TCard> = ({ className, item }) => {
             <span>Buy</span>
             <Icon name="scatter-up" size="16" />
           </button>
+          <div className={styles.category}>
+          <button 
+            className={cn("button-small", styles.button)}
+            // onClick={async () => { await handleBuyItem(item) }}
+          >
+            <span>View Detail</span>
+            <Icon name="scatter-up" size="16" />
+          </button>
+        </div>
         </div>
       </div>
-      <CustomLink className={styles.link} href="/">
+      {/* <CustomLink className={styles.link} href={href}> */}
         <div className={styles.body}>
           <div className={styles.line}>
             <div className={styles.title}>{item.name}</div>
@@ -52,7 +63,7 @@ const Card: FC<TCard> = ({ className, item }) => {
                 <img src="/images/content/avatar-1.jpg" alt="Avatar" />
             </div> 
         </div>
-      </CustomLink>
+      {/* </CustomLink> */}
     </div>
   );
 };
