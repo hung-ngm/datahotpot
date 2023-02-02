@@ -1,12 +1,35 @@
 import { NextPage } from 'next';
+import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
 import { Layout } from '../../src/components/layout';
 import { BuyDetails } from "../../src/components/templates/buyDetails"
-import { IBuyDetails } from '../../src/components/templates/buyDetails/types';
+import { TC } from '../../src/components/modules/card/types';
+import { loadSingleDataNFT } from '../api/contracts/loadSingleNFT';
 
-const ItemDetailsPage: NextPage<IBuyDetails> = ({ item }) => {
+const ItemDetailsPage: NextPage = () => {
+    const [item, setItem] = useState<TC>();
+    const router = useRouter();
+    const { id } = router.query;
+
+    const loadItem = async () => {
+        if (id) {
+            const item = await loadSingleDataNFT(Number(id));
+            console.log('item', item);
+            setItem(item);
+        }
+    }
+    
+    useEffect(() => {
+        if (item) {
+            return;
+        }
+        loadItem();
+
+    }, [item])
+
     return (
         <Layout>
-            <BuyDetails item={item} />
+            {item && <BuyDetails item={item} />}
         </Layout>
     );
 };

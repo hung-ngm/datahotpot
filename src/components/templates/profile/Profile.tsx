@@ -273,7 +273,6 @@ const Profile: FC<IProfile> = ({ myDataNFTs }) => {
                     className={styles.items} 
                     items={bids.slice(0, 3)} 
                     cardName="Buy"
-                    onCardClick={() => {}}
                   />
                 )}
                 {(activeIndex === 1 && myDataNFTs) && (
@@ -281,7 +280,6 @@ const Profile: FC<IProfile> = ({ myDataNFTs }) => {
                     className={styles.items} 
                     items={myDataNFTs.slice(0, 6)} 
                     cardName="Sell"
-                    onCardClick={() => {}}
                   />
                 )}
                 {activeIndex === 2 && (

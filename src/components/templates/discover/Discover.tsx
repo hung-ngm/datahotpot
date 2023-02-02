@@ -119,7 +119,6 @@ const Discovery: FC<IDiscovery> = ({ dataNFTs }) => {
                               text="Buy"
                               item={x} 
                               key={index} 
-                              onClick={async () => { await handleBuyItem(x) }}
                             />
                         ))}
                     </Slider>

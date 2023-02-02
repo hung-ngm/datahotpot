@@ -5,7 +5,7 @@ import {Card} from "../card";
 import {Loader} from "../loader";
 import {TItems} from "./types";
 
-const Items:FC<TItems> = ({ className, items, cardName, onCardClick }) => {
+const Items:FC<TItems> = ({ className, items, cardName }) => {
   return (
     <div className={cn(styles.items, className)}>
       <div className={styles.list}>
@@ -15,7 +15,6 @@ const Items:FC<TItems> = ({ className, items, cardName, onCardClick }) => {
             item={x} 
             key={index} 
             text={cardName}
-            onClick={onCardClick}
           />
         ))}
       </div>

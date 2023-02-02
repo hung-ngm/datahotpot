@@ -5,5 +5,4 @@ export type TItems = {
     className: string;
     items: Array<TC>;
     cardName: string;
-    onCardClick: () => void;
 }
