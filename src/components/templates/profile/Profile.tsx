@@ -11,9 +11,7 @@ import {Items} from "../../modules/items";
 import { bids } from "../../mock/bids";
 import { IProfile } from "./types";
 import { TNFTItem } from "../../../../types/NFTItem";
-import { Modal } from "../../modules/modal";
-import { TModal } from "../../modules/modal/types";
-import { FollowSellSteps } from "../../modules/followSellSteps";
+
 
 const navLinks = [
   "On Sale",
@@ -195,20 +193,6 @@ const Profile: FC<IProfile> = ({ myDataNFTs }) => {
   const [visibleOnSaleModal, setVisibleOnSaleModal] = useState<boolean>(false);
   const [visiblePurchasedModal, setVisiblePurchasedModal] = useState<boolean>(false);
 
-  const sellModal = (item: TNFTItem) => {
-    return (
-      <Modal
-        visible={visibleOnSaleModal}
-        onClose={() => setVisibleOnSaleModal(false)}
-      >
-        <FollowSellSteps
-          className={styles.steps}
-          nft={item}
-        />
-      </Modal>
-    )
-  }
-
   return (
     <div className={styles.profile}>
       <div
@@ -274,6 +258,7 @@ const Profile: FC<IProfile> = ({ myDataNFTs }) => {
                     className={styles.items} 
                     items={bids.slice(0, 3)} 
                     cardName="Buy"
+                    isBuy={true}
                   />
                 )}
                 {(activeIndex === 1 && myDataNFTs) && (
@@ -281,6 +266,7 @@ const Profile: FC<IProfile> = ({ myDataNFTs }) => {
                     className={styles.items} 
                     items={myDataNFTs.slice(0, 6)} 
                     cardName="Sell"
+                    isBuy={false}
                   />
                 )}
                 {activeIndex === 2 && (

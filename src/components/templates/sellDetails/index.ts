@@ -1,0 +1,1 @@
+export { default as SellDetails } from "./SellDetails";

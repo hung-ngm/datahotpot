@@ -2,14 +2,15 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { Layout } from '../../src/components/layout';
-import { BuyDetails } from "../../src/components/templates/buyDetails"
+import { SellDetails } from "../../src/components/templates/sellDetails"
 import { TNFTItem } from '../../types/NFTItem';
 import { loadSingleDataNFT } from '../api/contracts/loadSingleNFT';
 
-const BuyDetailsPage: NextPage = () => {
+const SellDetailsPage: NextPage = () => {
     const [item, setItem] = useState<TNFTItem>();
     const router = useRouter();
     const { id } = router.query;
+    console.log('id sell details is', id);
 
     const loadItem = async () => {
         if (id) {
@@ -29,9 +30,9 @@ const BuyDetailsPage: NextPage = () => {
 
     return (
         <Layout>
-            {item && <BuyDetails item={item} />}
+            {item && <SellDetails item={item} />}
         </Layout>
     );
 };
 
-export default BuyDetailsPage;
+export default SellDetailsPage;
