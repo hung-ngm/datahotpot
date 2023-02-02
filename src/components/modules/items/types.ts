@@ -6,7 +6,4 @@ export type TItems = {
     items: Array<TC>;
     cardName: string;
     onCardClick: () => void;
-    visibleModal: boolean;
-    setVisibleModal: Dispatch<SetStateAction<boolean>>
-    modal?: any;
 }

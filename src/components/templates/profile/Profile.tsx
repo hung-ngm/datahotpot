@@ -273,8 +273,6 @@ const Profile: FC<IProfile> = ({ myDataNFTs }) => {
                     className={styles.items} 
                     items={bids.slice(0, 3)} 
                     cardName="Buy"
-                    visibleModal={visibleOnSaleModal}
-                    setVisibleModal={setVisibleOnSaleModal}
                     onCardClick={() => {}}
                   />
                 )}
@@ -283,10 +281,7 @@ const Profile: FC<IProfile> = ({ myDataNFTs }) => {
                     className={styles.items} 
                     items={myDataNFTs.slice(0, 6)} 
                     cardName="Sell"
-                    visibleModal={visiblePurchasedModal}
-                    setVisibleModal={setVisiblePurchasedModal}
                     onCardClick={() => {}}
-                    modal={sellModal}
                   />
                 )}
                 {activeIndex === 2 && (
