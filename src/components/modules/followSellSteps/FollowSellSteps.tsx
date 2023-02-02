@@ -6,7 +6,7 @@ import {Loader} from "../../modules/loader";
 import {LoaderCircle} from "../loaderCircle";
 import {TFollowSellSteps} from "./types"
 import { resellDataNFT } from "../../../../pages/api/contracts/sellDataNFT";
-import { TNFTItem } from "../../templates/discover/types";
+import { TNFTItem } from "../../../../types/NFTItem";
 
 const FollowSteps:FC<TFollowSellSteps> = ({ 
   className, 

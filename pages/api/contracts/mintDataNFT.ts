@@ -1,6 +1,5 @@
 import { ethers } from 'ethers'
 import Web3Modal from 'web3modal';
-
 import DataNFT from '../../../abis/DataNFT.json';
 
 export const mintDataNFT = async (
