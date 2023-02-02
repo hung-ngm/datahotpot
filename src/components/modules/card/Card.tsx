@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
+import Link from "next/link";
 import cn from "classnames";
 import { CustomLink } from "../customLink/index";
 import {TCard} from './types';
@@ -7,10 +8,8 @@ import styles from "./Card.module.sass";
 import { Icon } from "../icon";
 import Interpunct from "react-interpunct";
 
-const Card: FC<TCard> = ({ className, item, text, onClick }) => {
-  const [visible, setVisible] = useState(false);
-
-  const href:string = "/item-details/" + item.itemId;
+const Card: FC<TCard> = ({ className, item, text }) => {
+  const href: string = "/buy-details/" + item.itemId;
 
   return (
     <div className={cn(styles.card, className)}>
@@ -21,17 +20,17 @@ const Card: FC<TCard> = ({ className, item, text, onClick }) => {
           alt="Card" 
         />
         <div className={styles.control}>
-          <button 
-            className={cn("button-small", styles.button)}
-            onClick={onClick}
-          >
-            <span>{text}</span>
-            <Icon name="scatter-up" size="16" />
-          </button>
+          <Link href={href}>
+            <button 
+              className={cn("button-small", styles.button)}
+            >
+              <span>{text}</span>
+              <Icon name="scatter-up" size="16" />
+            </button>
+          </Link>
           <div className={styles.category}>
           <button 
             className={cn("button-small", styles.button)}
-            // onClick={async () => { await handleBuyItem(item) }}
           >
             <span>View Detail</span>
             <Icon name="scatter-up" size="16" />
@@ -39,7 +38,6 @@ const Card: FC<TCard> = ({ className, item, text, onClick }) => {
         </div>
         </div>
       </div>
-      {/* <CustomLink className={styles.link} href={href}> */}
         <div className={styles.body}>
           <div className={styles.line}>
             <div className={styles.title}>{item.name}</div>
@@ -57,7 +55,6 @@ const Card: FC<TCard> = ({ className, item, text, onClick }) => {
               <img src="/images/content/avatar-1.jpg" alt="Avatar" />
             </div> 
         </div>
-      {/* </CustomLink> */}
     </div>
   );
 };

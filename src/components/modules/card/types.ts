@@ -2,11 +2,11 @@ export type TCard = {
     className: string;
     item: TC;
     text: string;
-    onClick: () => void;
 }
 
 export type TC = {
     contract: string;
+    contains: string;
     price: string;
     tokenId: number;
     seller: string;
