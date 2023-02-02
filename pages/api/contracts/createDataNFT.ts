@@ -1,8 +1,6 @@
 import { ethers } from 'ethers'
 import Web3Modal from 'web3modal';
-
 import { datahotpotMarketplaceAddress } from '../../../utils/addresses';
-
 import DataNFT from '../../../abis/DataNFT.json';
 
 export const createDataNFT = async (

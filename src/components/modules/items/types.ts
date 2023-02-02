@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction, FC } from 'react';
-import {TC} from "../card/types"
+import { TNFTItem } from '../../../../types/NFTItem';
 
 export type TItems = {
     className: string;
-    items: Array<TC>;
+    items: Array<TNFTItem>;
     cardName: string;
 }

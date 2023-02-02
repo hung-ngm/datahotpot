@@ -1,6 +1,5 @@
 import { ethers } from 'ethers'
 import Web3Modal from 'web3modal';
-
 import { datahotpotMarketplaceAddress } from '../../../utils/addresses';
 import DatahotpotMarketplace from '../../../abis/DatahotpotMarketplace.json';
 

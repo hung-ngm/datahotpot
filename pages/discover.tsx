@@ -3,7 +3,8 @@ import { NextPage, GetStaticProps, GetServerSideProps } from 'next';
 import { Layout } from '../src/components/layout';
 import { Discover } from '../src/components/templates/discover';
 import { loadDataNFTs } from './api/contracts/loadDataNFTs';
-import { IDiscovery, TNFTItem } from '../src/components/templates/discover/types';
+import { IDiscovery } from '../src/components/templates/discover/types';
+import { TNFTItem } from '../types/NFTItem';
 
 const DiscoverPage: NextPage = () => {
     const [dataNFTs, setDataNFTs] = useState<TNFTItem[]>();

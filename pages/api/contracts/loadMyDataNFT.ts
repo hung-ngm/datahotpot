@@ -1,12 +1,11 @@
 import { ethers } from 'ethers';
 import axios from 'axios';
-
 import { datahotpotMarketplaceAddress } from '../../../utils/addresses';
-
 import DataNFT from '../../../abis/DataNFT.json';
 import DatahotpotMarketplace from '../../../abis/DatahotpotMarketplace.json';
+import { TNFTItem } from '../../../types/NFTItem';
 
-export const loadMyDataNFTs = async (address: string) => {
+export const loadMyDataNFTs = async (address: string) : Promise<TNFTItem[]> => {
     const provider = new ethers.providers.JsonRpcProvider("https://api.hyperspace.node.glif.io/rpc/v1");
     const marketContract = new ethers.Contract(
        datahotpotMarketplaceAddress, 
