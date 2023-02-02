@@ -1,33 +1,33 @@
-import { NextPage, GetServerSideProps } from 'next';
+import { useState, useEffect } from 'react';
+import { NextPage, GetStaticProps, GetServerSideProps } from 'next';
 import { Layout } from '../src/components/layout';
 import { Discover } from '../src/components/templates/discover';
 import { loadDataNFTs } from './api/contracts/loadDataNFTs';
-import { IDiscovery } from '../src/components/templates/discover/types';
+import { IDiscovery, TNFTItem } from '../src/components/templates/discover/types';
 
-const DiscoverPage: NextPage<IDiscovery> = (props) => {
+const DiscoverPage: NextPage = () => {
+    const [dataNFTs, setDataNFTs] = useState<TNFTItem[]>();
+    
     const loadNFTs = async () => {
         const items = await loadDataNFTs();
         console.log('items', items);
+        setDataNFTs(items);
     }
+    
+    useEffect(() => {
+        if (dataNFTs) {
+            return;
+        }
+        loadNFTs();
+    }, [dataNFTs])
+    
 
-    loadNFTs();
 
     return (
         <Layout>
-            <Discover {...props} />
+            <Discover dataNFTs={dataNFTs} />
         </Layout>
     );
 };
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    const items = await loadDataNFTs();
-
-    return {
-      props: {
-        dataNFTs: items,
-      },
-    };
-};
-
 
 export default DiscoverPage;

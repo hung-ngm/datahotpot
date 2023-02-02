@@ -7,7 +7,7 @@ import styles from "./Modal.module.sass";
 import {Icon} from "../../modules/icon";
 import {TModal} from "./types";
 
-const Modal:FC<TModal> = ({
+const Modal: FC<TModal> = ({
   outerClassName,
   containerClassName,
   visible,

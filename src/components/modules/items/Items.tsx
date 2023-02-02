@@ -5,12 +5,18 @@ import {Card} from "../card";
 import {Loader} from "../loader";
 import {TItems} from "./types";
 
-const Items:FC<TItems> = ({ className, items }) => {
+const Items:FC<TItems> = ({ className, items, cardName, onCardClick }) => {
   return (
     <div className={cn(styles.items, className)}>
       <div className={styles.list}>
         {items.map((x, index) => (
-          <Card className={styles.card} item={x} key={index} />
+          <Card 
+            className={styles.card} 
+            item={x} 
+            key={index} 
+            text={cardName}
+            onClick={onCardClick}
+          />
         ))}
       </div>
       <Loader className={styles.loader} />
