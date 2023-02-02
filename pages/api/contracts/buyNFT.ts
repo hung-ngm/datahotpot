@@ -1,11 +1,10 @@
 import { ethers } from 'ethers';
 import Web3Modal from 'web3modal';
-
 import { datahotpotMarketplaceAddress } from '../../../utils/addresses';
 import DatahotpotMarketplace from '../../../abis/DatahotpotMarketplace.json';
-import { TNFTItem } from '../../../src/components/templates/discover/types';
+import { TNFTItem } from '../../../types/NFTItem';
 
-export const buyNFT = async (nft: TNFTItem) => {
+export const buyNFT = async (nft: TNFTItem) : Promise<boolean> => {
     try{
         const web3Modal = new Web3Modal();
         const connection = await web3Modal.connect();
@@ -24,8 +23,10 @@ export const buyNFT = async (nft: TNFTItem) => {
         });
         const res = await transaction.wait();
         console.log('buy res', res);
+        return true;
         
     }catch (e: any){
         console.log(e);
+        return false;
     }
 }

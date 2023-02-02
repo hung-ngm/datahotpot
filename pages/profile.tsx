@@ -4,7 +4,7 @@ import { Layout } from '../src/components/layout';
 import { Profile } from '../src/components/templates/profile';
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
-import { TNFTItem } from '../src/components/templates/profile/types';
+import { TNFTItem } from '../types/NFTItem';
 import { loadMyDataNFTs } from './api/contracts/loadMyDataNFT';
 
 const ProfilePage: NextPage = () => {

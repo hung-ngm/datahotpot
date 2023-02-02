@@ -1,4 +1,4 @@
-import { TNFTItem } from "../../templates/profile/types";
+import { TNFTItem } from "../../../../types/NFTItem";
 
 export type TFollowSellSteps = {
     className: string;

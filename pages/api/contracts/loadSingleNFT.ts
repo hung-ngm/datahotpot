@@ -1,10 +1,9 @@
 import { ethers } from 'ethers';
 import axios from 'axios';
-
 import { datahotpotMarketplaceAddress } from '../../../utils/addresses';
-
 import DataNFT from '../../../abis/DataNFT.json';
 import DatahotpotMarketplace from '../../../abis/DatahotpotMarketplace.json';
+import { TNFTItem } from '../../../types/NFTItem';
 
 export const loadSingleDataNFT = async (id: number) => {
     const provider = new ethers.providers.JsonRpcProvider("https://api.hyperspace.node.glif.io/rpc/v1");

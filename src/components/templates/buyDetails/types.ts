@@ -1,9 +1,9 @@
-import { TC } from "../../modules/card/types";
+import { TNFTItem } from "../../../../types/NFTItem"
 
 export type TBuyDetails = {
-    item: TC
+    item: TNFTItem
 }
 
 export interface IBuyDetails {
-    item: TC
+    item: TNFTItem
 }

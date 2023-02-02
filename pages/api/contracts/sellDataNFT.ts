@@ -3,12 +3,12 @@ import Web3Modal from 'web3modal';
 
 import { datahotpotMarketplaceAddress } from '../../../utils/addresses';
 import DatahotpotMarketplace from '../../../abis/DatahotpotMarketplace.json';
-import { TNFTItem } from '../../../src/components/templates/discover/types';
+import { TNFTItem } from '../../../types/NFTItem';
 
 export const resellDataNFT = async (
     nft: TNFTItem,
     newPrice: number,
-) => {
+) : Promise<boolean> => {
     try{
         const web3Modal = new Web3Modal();
         const connection = await web3Modal.connect();

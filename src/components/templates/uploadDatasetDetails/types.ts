@@ -5,4 +5,4 @@ export type SelectOption = {
 
 export type TRoyaltiesMap = {
     [key: string]: number;
-  }
+}
