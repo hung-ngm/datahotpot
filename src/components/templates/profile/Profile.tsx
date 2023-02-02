@@ -9,7 +9,8 @@ import {Items} from "../../modules/items";
 
 // data
 import { bids } from "../../mock/bids";
-import { IProfile, TNFTItem } from "./types";
+import { IProfile } from "./types";
+import { TNFTItem } from "../../../../types/NFTItem";
 import { Modal } from "../../modules/modal";
 import { TModal } from "../../modules/modal/types";
 import { FollowSellSteps } from "../../modules/followSellSteps";

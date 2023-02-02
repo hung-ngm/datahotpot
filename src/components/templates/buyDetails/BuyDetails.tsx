@@ -7,7 +7,7 @@ import {UserItem} from "../../modules/userItem";
 // import Control from "./Control";
 // import Options from "./Options";
 import { buyNFT } from "../../../../pages/api/contracts/buyNFT";
-import {TC} from "../../modules/card/types";
+import { TNFTItem } from "../../../../types/NFTItem";
 import { TBuyDetails } from "./types";
 
 const navLinks = ["Info", "Owners"];
@@ -29,7 +29,7 @@ const users = [
 const BuyDetails: FC<TBuyDetails> = ({ item }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const handleBuyItem = async (item: TC) => {
+  const handleBuyItem = async (item: TNFTItem) => {
     const res = await buyNFT(item);
     console.log('buy res', res);
   }
@@ -50,7 +50,11 @@ const BuyDetails: FC<TBuyDetails> = ({ item }) => {
           <div className={styles.details}>
             <h1 className={cn("h3", styles.title)}>{item.name}</h1>
             <div className={styles.cate}>
-              {item.tags.map((tag, index) => <div key={index} className={cn("status-purple", styles.tag)}>#{tag}</div>)}
+              {item.tags.map((tag: string, index: number) => 
+                <div key={index} className={cn("status-purple", styles.tag)}>
+                  #{tag}
+                </div>
+              )}
             </div>
             <div className={styles.cost}>
               <div className={cn("status-stroke-green", styles.price)}>
