@@ -1,11 +1,4 @@
-export type TCard = {
-    className: string;
-    item: TC;
-    text: string;
-    onClick: () => void;
-}
-
-export type TC = {
+export type TNFTItem = {
     contract: string;
     price: string;
     tokenId: number;
@@ -16,4 +9,8 @@ export type TC = {
     sources: string;
     tags: string[];
     itemId: number;
+}
+
+export interface IProfile {
+    myDataNFTs? : TNFTItem[];
 }

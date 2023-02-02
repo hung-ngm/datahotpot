@@ -6,6 +6,8 @@ import { Icon } from "../../modules/icon";
 import { Card } from "../../modules/card";
 import Slider from "react-slick";
 import { TSlide, IDiscovery } from "./types";
+import { buyNFT } from "../../../../pages/api/contracts/buyNFT";
+import { TC } from "../../modules/card/types";
 
 const SlickArrow: FC<TSlide> = ({children, ...props }) => (
   <button {...props}>{children}</button>
@@ -28,6 +30,11 @@ const Discovery: FC<IDiscovery> = ({ dataNFTs }) => {
   const handleSubmit = (e:string) => {
     alert();
   };
+
+  const handleBuyItem = async (item: TC) => {
+    const res = await buyNFT(item);
+    console.log('buy res', res);
+  }
 
   const STEP = 0.1;
   const MIN = 0.01;
@@ -109,8 +116,10 @@ const Discovery: FC<IDiscovery> = ({ dataNFTs }) => {
                         {dataNFTs?.map((x, index) => (
                             <Card 
                               className={styles.card} 
+                              text="Buy"
                               item={x} 
                               key={index} 
+                              onClick={async () => { await handleBuyItem(x) }}
                             />
                         ))}
                     </Slider>

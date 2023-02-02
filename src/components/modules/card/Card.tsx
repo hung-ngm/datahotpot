@@ -2,19 +2,13 @@
 import React, { FC, useState } from "react";
 import cn from "classnames";
 import { CustomLink } from "../customLink/index";
-import {TCard, TC} from './types';
+import {TCard} from './types';
 import styles from "./Card.module.sass";
 import { Icon } from "../icon";
 import Interpunct from "react-interpunct";
-import { buyNFT } from "../../../../pages/api/contracts/buyNFT";
 
-const Card: FC<TCard> = ({ className, item }) => {
+const Card: FC<TCard> = ({ className, item, text, onClick }) => {
   const [visible, setVisible] = useState(false);
-
-  const handleBuyItem = async (item: TC) => {
-    const res = await buyNFT(item);
-    console.log('buy res', res);
-  }
 
   const href:string = "/item-details/" + item.itemId;
 
@@ -29,9 +23,9 @@ const Card: FC<TCard> = ({ className, item }) => {
         <div className={styles.control}>
           <button 
             className={cn("button-small", styles.button)}
-            onClick={async () => { await handleBuyItem(item) }}
+            onClick={onClick}
           >
-            <span>Buy</span>
+            <span>{text}</span>
             <Icon name="scatter-up" size="16" />
           </button>
           <div className={styles.category}>
@@ -55,12 +49,12 @@ const Card: FC<TCard> = ({ className, item }) => {
         </div>
         <div className={styles.foot}>
             <div className = {styles.line2}>
-                <div className={styles.files}>1 file (CSV)</div>
-                <Interpunct></Interpunct>
-                <div className={styles.limitSize}>3 MB</div>
+              <div className={styles.files}>1 file (CSV)</div>
+              <Interpunct></Interpunct>
+              <div className={styles.limitSize}>3 MB</div>
             </div>
             <div className={styles.avatar}>
-                <img src="/images/content/avatar-1.jpg" alt="Avatar" />
+              <img src="/images/content/avatar-1.jpg" alt="Avatar" />
             </div> 
         </div>
       {/* </CustomLink> */}

@@ -9,6 +9,10 @@ import {Items} from "../../modules/items";
 
 // data
 import { bids } from "../../mock/bids";
+import { IProfile, TNFTItem } from "./types";
+import { Modal } from "../../modules/modal";
+import { TModal } from "../../modules/modal/types";
+import { FollowSellSteps } from "../../modules/followSellSteps";
 
 const navLinks = [
   "On Sale",
@@ -180,9 +184,29 @@ const followers = [
   },
 ];
 
-const Profile: FC = () => {
+
+
+const Profile: FC<IProfile> = ({ myDataNFTs }) => {
+  console.log('myDataNFTs', myDataNFTs);
   const [activeIndex, setActiveIndex] = useState(0);
   const [visible, setVisible] = useState(false);
+  
+  const [visibleOnSaleModal, setVisibleOnSaleModal] = useState<boolean>(false);
+  const [visiblePurchasedModal, setVisiblePurchasedModal] = useState<boolean>(false);
+
+  const sellModal = (item: TNFTItem) => {
+    return (
+      <Modal
+        visible={visibleOnSaleModal}
+        onClose={() => setVisibleOnSaleModal(false)}
+      >
+        <FollowSellSteps
+          className={styles.steps}
+          nft={item}
+        />
+      </Modal>
+    )
+  }
 
   return (
     <div className={styles.profile}>
@@ -245,16 +269,26 @@ const Profile: FC = () => {
             <div className={styles.group}>
               <div className={styles.item}>
                 {activeIndex === 0 && (
-                  <Items className={styles.items} items={bids.slice(0, 3)} />
+                  <Items 
+                    className={styles.items} 
+                    items={bids.slice(0, 3)} 
+                    cardName="Buy"
+                    onCardClick={() => {}}
+                  />
                 )}
-                {activeIndex === 1 && (
-                  <Items className={styles.items} items={bids.slice(0, 6)} />
+                {(activeIndex === 1 && myDataNFTs) && (
+                  <Items 
+                    className={styles.items} 
+                    items={myDataNFTs.slice(0, 6)} 
+                    cardName="Sell"
+                    onCardClick={() => {}}
+                  />
                 )}
                 {activeIndex === 2 && (
-                  <Items className={styles.items} items={bids.slice(0, 3)} />
+                  <></>
                 )}
                 {activeIndex === 3 && (
-                  <Items className={styles.items} items={bids.slice(0, 6)} />
+                  <></>
                 )}
               </div>
             </div>

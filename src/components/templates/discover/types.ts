@@ -2,7 +2,7 @@ export type TSlide = {
     children: JSX.Element;
 }
 
-export type TNFTItem =  {
+export type TNFTItem = {
     contract: string;
     price: string;
     tokenId: number;
