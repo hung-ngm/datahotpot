@@ -1,11 +1,13 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState, FC } from "react";
 import cn from "classnames";
-import styles from "./ItemDetails.module.sass";
+import styles from "./BuyDetails.module.sass";
 import {UserItem} from "../../modules/userItem";
 // import Control from "./Control";
 // import Options from "./Options";
 import { buyNFT } from "../../../../pages/api/contracts/buyNFT";
 import {TC} from "../../modules/card/types";
+import { TBuyDetails } from "./types";
 
 const navLinks = ["Info", "Owners"];
 
@@ -23,7 +25,7 @@ const users = [
   },
 ];
 
-const ItemDetails:FC<TC> = (item) => {
+const BuyDetails: FC<TBuyDetails> = ({ item }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleBuyItem = async (item: TC) => {
@@ -102,4 +104,4 @@ const ItemDetails:FC<TC> = (item) => {
   );
 };
 
-export default ItemDetails;
+export default BuyDetails;
