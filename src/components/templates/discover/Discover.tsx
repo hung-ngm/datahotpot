@@ -119,6 +119,7 @@ const Discovery: FC<IDiscovery> = ({ dataNFTs }) => {
                               text="Buy"
                               item={x} 
                               key={index} 
+                              isBuy={true}
                             />
                         ))}
                     </Slider>

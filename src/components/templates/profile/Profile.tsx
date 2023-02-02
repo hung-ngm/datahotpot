@@ -11,8 +11,6 @@ import {Items} from "../../modules/items";
 import { bids } from "../../mock/bids";
 import { IProfile } from "./types";
 import { TNFTItem } from "../../../../types/NFTItem";
-import { Modal } from "../../modules/modal";
-import { TModal } from "../../modules/modal/types";
 
 
 const navLinks = [
@@ -260,6 +258,7 @@ const Profile: FC<IProfile> = ({ myDataNFTs }) => {
                     className={styles.items} 
                     items={bids.slice(0, 3)} 
                     cardName="Buy"
+                    isBuy={true}
                   />
                 )}
                 {(activeIndex === 1 && myDataNFTs) && (
@@ -267,6 +266,7 @@ const Profile: FC<IProfile> = ({ myDataNFTs }) => {
                     className={styles.items} 
                     items={myDataNFTs.slice(0, 6)} 
                     cardName="Sell"
+                    isBuy={false}
                   />
                 )}
                 {activeIndex === 2 && (

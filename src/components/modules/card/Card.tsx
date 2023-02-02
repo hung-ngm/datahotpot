@@ -8,8 +8,8 @@ import styles from "./Card.module.sass";
 import { Icon } from "../icon";
 import Interpunct from "react-interpunct";
 
-const Card: FC<TCard> = ({ className, item, text }) => {
-  const href: string = "/buy-details/" + item.itemId;
+const Card: FC<TCard> = ({ className, item, text, isBuy }) => {
+  const href: string = (isBuy) ? ("/buy-details/" + item.itemId) : ("/sell-details/" + item.itemId);
 
   return (
     <div className={cn(styles.card, className)}>
@@ -28,14 +28,7 @@ const Card: FC<TCard> = ({ className, item, text }) => {
               <Icon name="scatter-up" size="16" />
             </button>
           </Link>
-          <div className={styles.category}>
-          <button 
-            className={cn("button-small", styles.button)}
-          >
-            <span>View Detail</span>
-            <Icon name="scatter-up" size="16" />
-          </button>
-        </div>
+          
         </div>
       </div>
         <div className={styles.body}>

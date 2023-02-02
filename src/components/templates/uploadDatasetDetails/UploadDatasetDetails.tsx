@@ -175,7 +175,7 @@ const UploadDatasetDetails:FC = () => {
                           label="Price"
                           name="Price"
                           type="text"
-                          placeholder="e. g. 0.001 ETH"
+                          placeholder="e.g. 0.001 FIL"
                           required
                           value={price}
                           onChange={(e: any) => setPrice(e.target.value)}

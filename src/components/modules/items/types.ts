@@ -5,4 +5,5 @@ export type TItems = {
     className: string;
     items: Array<TNFTItem>;
     cardName: string;
+    isBuy: boolean;
 }

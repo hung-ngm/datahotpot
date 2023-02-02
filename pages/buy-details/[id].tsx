@@ -6,7 +6,7 @@ import { BuyDetails } from "../../src/components/templates/buyDetails"
 import { TNFTItem } from '../../types/NFTItem';
 import { loadSingleDataNFT } from '../api/contracts/loadSingleNFT';
 
-const ItemDetailsPage: NextPage = () => {
+const BuyDetailsPage: NextPage = () => {
     const [item, setItem] = useState<TNFTItem>();
     const router = useRouter();
     const { id } = router.query;
@@ -34,4 +34,4 @@ const ItemDetailsPage: NextPage = () => {
     );
 };
 
-export default ItemDetailsPage;
+export default BuyDetailsPage;

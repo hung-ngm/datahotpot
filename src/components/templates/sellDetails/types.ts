@@ -1,5 +1,5 @@
 import { TNFTItem } from "../../../../types/NFTItem"
 
-export type TBuyDetails = {
+export type TSellDetails = {
     item: TNFTItem
 }

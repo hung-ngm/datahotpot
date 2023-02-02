@@ -5,7 +5,7 @@ import {Card} from "../card";
 import {Loader} from "../loader";
 import {TItems} from "./types";
 
-const Items:FC<TItems> = ({ className, items, cardName }) => {
+const Items:FC<TItems> = ({ className, items, cardName, isBuy }) => {
   return (
     <div className={cn(styles.items, className)}>
       <div className={styles.list}>
@@ -15,6 +15,7 @@ const Items:FC<TItems> = ({ className, items, cardName }) => {
             item={x} 
             key={index} 
             text={cardName}
+            isBuy={isBuy}
           />
         ))}
       </div>
