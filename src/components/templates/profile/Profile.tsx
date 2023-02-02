@@ -13,7 +13,7 @@ import { IProfile } from "./types";
 import { TNFTItem } from "../../../../types/NFTItem";
 import { Modal } from "../../modules/modal";
 import { TModal } from "../../modules/modal/types";
-import { FollowSellSteps } from "../../modules/followSellSteps";
+
 
 const navLinks = [
   "On Sale",
@@ -194,20 +194,6 @@ const Profile: FC<IProfile> = ({ myDataNFTs }) => {
   
   const [visibleOnSaleModal, setVisibleOnSaleModal] = useState<boolean>(false);
   const [visiblePurchasedModal, setVisiblePurchasedModal] = useState<boolean>(false);
-
-  const sellModal = (item: TNFTItem) => {
-    return (
-      <Modal
-        visible={visibleOnSaleModal}
-        onClose={() => setVisibleOnSaleModal(false)}
-      >
-        <FollowSellSteps
-          className={styles.steps}
-          nft={item}
-        />
-      </Modal>
-    )
-  }
 
   return (
     <div className={styles.profile}>
