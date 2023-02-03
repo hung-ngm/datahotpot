@@ -265,7 +265,7 @@ const Profile: FC<IProfile> = ({ myDataNFTs }) => {
                   <Items 
                     className={styles.items} 
                     items={myDataNFTs.slice(0, 6)} 
-                    cardName="Sell"
+                    cardName="View / Sell"
                     isBuy={false}
                   />
                 )}
