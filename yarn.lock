@@ -842,7 +842,7 @@
     bls-eth-wasm "^1.0.5"
     joi "^17.7.0"
 
-"@lighthouse-web3/sdk@^0.1.12":
+"@lighthouse-web3/sdk@0.1.12":
   version "0.1.12"
   resolved "https://registry.yarnpkg.com/@lighthouse-web3/sdk/-/sdk-0.1.12.tgz#e35576dcee26a9f9ce219e817cb48576d662e949"
   integrity sha512-iVMQE5I/o8hFzFB6zlEPFY9ggGZVfVAS+Ws7NAYPuoO89WDlUOpbZ/SQsKGbEO4smASCNwKVxfKo68dErV94jQ==

@@ -49,10 +49,11 @@ const SellDetails: FC<TSellDetails> = ({ item }) => {
 
   useEffect(() => {
     if (dataUrl) {
+      console.log('dataUrl', dataUrl)
       return;
     }
     getDatasetUrl(item);
-  }, [dataUrl, item])
+  }, [dataUrl])
 
   return (
     <>
