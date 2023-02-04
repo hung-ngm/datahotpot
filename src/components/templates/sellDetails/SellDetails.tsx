@@ -62,8 +62,8 @@ const SellDetails: FC<TSellDetails> = ({ item }) => {
           <div className={styles.bg}>
             <div className={styles.preview}>
               <img
-                srcSet="/images/content/item-pic@2x.jpg 2x"
-                src="/images/content/item-pic.jpg"
+                srcSet={item.thumbnailUrl}
+                src={item.thumbnailUrl}
                 alt="Item"
               />
             </div>
