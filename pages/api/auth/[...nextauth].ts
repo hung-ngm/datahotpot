@@ -123,7 +123,7 @@ export default async function auth(req: any, res: any) {
         console.log('token is', token);
         
         const userId = await handleSupabaseSignIn({ session, token });
-        session.userId = userId;
+        session.user.uid = userId;
         console.log('session is', session);
 
         return session
