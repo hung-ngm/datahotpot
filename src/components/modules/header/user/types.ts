@@ -1,3 +1,3 @@
-export type TUser = {
+export type TU = {
     className: string;
 }

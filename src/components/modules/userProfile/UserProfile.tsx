@@ -9,21 +9,15 @@ import { FacebookShareButton, TwitterShareButton } from "react-share";
 import {TUP} from "./types";
 import { walletAddressShorterner } from "../../../../utils/walletAddressShorterner";
 
-const shareUrlFacebook = "https://ui8.net";
-const shareUrlTwitter = "https://ui8.net";
 
 const UserProfile: FC<TUP> = ({ className, item, user }) => {
-  const [visible, setVisible] = useState(false);
-  const [visibleShare, setVisibleShare] = useState(false);
-  const [visibleModalReport, setVisibleModalReport] = useState(false);
-
   return (
     <>
       <div className={cn(styles.user, className)}>
         <div className={styles.avatar}>
           <img src="/images/content/avatar-big.jpg" alt="Avatar" />
         </div>
-        <div className={styles.name}>Enrico Cole</div>
+        <div className={styles.name}>{user.name ? user.name : "Unamed"}</div>
         <div className={styles.code}>
           <div className={styles.number}>{walletAddressShorterner(user.address)}</div>
           <button className={styles.copy}>
