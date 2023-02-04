@@ -11,28 +11,11 @@ import { signOut, useSession } from "next-auth/react";
 import { useDisconnect } from "wagmi";
 import { walletAddressShorterner } from "../../../../../utils/walletAddressShorterner";
 
-const items = [
-  {
-    title: "My profile",
-    icon: "user",
-    url: "/profile",
-  },
-  {
-    title: "Dark theme",
-    icon: "bulb",
-  },
-  {
-    title: "Disconnect",
-    icon: "exit",
-    url: "/api/auth/signout",
-  },
-];
-
 const User: FC<TUser> = ({ className }) => {
   const [visible, setVisible] = useState(false);
   const { data: session } = useSession();
   const { disconnect } = useDisconnect();
-
+ 
   return (
     <OutsideClickHandler onOutsideClick={() => setVisible(false)}>
       {session?.user && (
@@ -76,49 +59,33 @@ const User: FC<TUser> = ({ className }) => {
               </button>
             </div>
             <div className={styles.menu}>
-              {items.map((x, index) =>
-                x.url ? (
-                  x.url.startsWith("/api") ? (
-                    <a
-                      className={styles.item}
-                      style={{ textDecoration: 'none' }}
-                      href={x.url}
-                      rel="noopener noreferrer"
-                      onClick={(e) => {
-                        e.preventDefault()
-                        disconnect()
-                        signOut()
-                      }}
-                      key={index}
-                    >
-                      <div className={styles.icon}>
-                        <Icon name={x.icon} size="20" />
-                      </div>
-                      <div className={styles.text}>{x.title}</div>
-                    </a>
-                  ) : (
-                    <CustomLink
-                      className={styles.item}
-                      href={x.url}
-                      onClick={() => setVisible(!visible)}
-                      key={index}
-                    >
-                      <div className={styles.icon}>
-                        <Icon name={x.icon} size="20" />
-                      </div>
-                      <div className={styles.text}>{x.title}</div>
-                    </CustomLink>
-                  )
-                ) : (
-                  <div className={styles.item} key={index}>
-                    <div className={styles.icon}>
-                      <Icon name={x.icon} size="20" />
-                    </div>
-                    <div className={styles.text}>{x.title}</div>
-                    <Theme className={styles.theme} />
-                  </div>
-                )
-              )}
+              <CustomLink
+                className={styles.item}
+                href={`/profile/${session?.user.uid}`}
+                onClick={() => setVisible(!visible)}
+              >
+                <div className={styles.icon}>
+                  <Icon name="user" size="20" />
+                </div>
+                <div className={styles.text}>My profile</div>
+              </CustomLink>
+              
+              <a
+                className={styles.item}
+                style={{ textDecoration: 'none' }}
+                href={"/"}
+                rel="noopener noreferrer"
+                onClick={(e) => {
+                  e.preventDefault()
+                  disconnect()
+                  signOut()
+                }}
+              >
+                <div className={styles.icon}>
+                  <Icon name="exit" size="20" />
+                </div>
+                <div className={styles.text}>Disconnect</div>
+              </a>  
             </div>
           </div>
         )}
