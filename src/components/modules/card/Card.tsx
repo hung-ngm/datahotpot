@@ -15,8 +15,8 @@ const Card: FC<TCard> = ({ className, item, text, isBuy }) => {
     <div className={cn(styles.card, className)}>
       <div className={styles.preview}>
         <img 
-          srcSet={`/images/content/card-pic-1@2x.jpg 2x`} 
-          src="/images/content/card-pic-1.jpg" 
+          srcSet={item.thumbnailUrl} 
+          src={item.thumbnailUrl}
           alt="Card" 
         />
         <div className={styles.control}>
