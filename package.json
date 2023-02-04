@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@glif/filecoin-address": "2.0.18",
-    "@lighthouse-web3/sdk": "^0.1.12",
+    "@lighthouse-web3/sdk": "0.1.12",
     "@next-auth/prisma-adapter": "^1.0.5",
     "@openzeppelin/contracts": "^4.8.1",
     "@prisma/client": "^4.9.0",
