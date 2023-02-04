@@ -24,6 +24,10 @@ model User {
   name          String?
   address       String    @unique
   avatar        String?
+  bio           String?
+  facebook      String?
+  instagram     String?
+  twitter       String?
   createdAt     DateTime  @default(now())
   sessions      Session[]
   issues        Issue[]
