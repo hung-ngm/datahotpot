@@ -1,6 +1,9 @@
+import { TUser } from "../../../../types/user"
+
 export type TUP = {
     className: string,
-    item: Array<Social>
+    item: Array<Social>,
+    user: TUser
 }
 
 export type Social = {

@@ -182,16 +182,12 @@ const followers = [
   },
 ];
 
-
-
-const Profile: FC<IProfile> = ({ myDataNFTs }) => {
+const Profile: FC<IProfile> = ({ myDataNFTs, user }) => {
   console.log('myDataNFTs', myDataNFTs);
+  console.log('user', user);
   const [activeIndex, setActiveIndex] = useState(0);
   const [visible, setVisible] = useState(false);
   
-  const [visibleOnSaleModal, setVisibleOnSaleModal] = useState<boolean>(false);
-  const [visiblePurchasedModal, setVisiblePurchasedModal] = useState<boolean>(false);
-
   return (
     <div className={styles.profile}>
       <div
@@ -235,7 +231,11 @@ const Profile: FC<IProfile> = ({ myDataNFTs }) => {
       </div>
       <div className={styles.body}>
         <div className={cn("container", styles.container)}>
-          <UserProfile className={styles.user} item={socials} />
+          <UserProfile 
+            className={styles.user} 
+            item={socials} 
+            user={user}
+          />
           <div className={styles.wrapper}>
             <div className={styles.nav}>
               {navLinks.map((x, index) => (
