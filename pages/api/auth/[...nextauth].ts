@@ -43,12 +43,19 @@ const handleSupabaseSignIn = async ({ session, token } : { session: any, token: 
         
         if (sessionError) {
             console.log('session error', sessionError);
-        } else {
-            console.log('session data', sessionData);
-        }
+            return "";
+        } 
+        console.log('session data', sessionData);
+        return newUserId;
     } else {
         console.log('error', error);
+        if (data) {
+            console.log('data', data);
+            return data[0].id;
+        }
+        return "";
     }
+
 }
 
 // For more information on each option (and a full list of options) go to
@@ -114,9 +121,10 @@ export default async function auth(req: any, res: any) {
         session.user.name = token.sub
         session.user.image = "https://www.fillmurray.com/128/128"
         console.log('token is', token);
+        
+        const userId = await handleSupabaseSignIn({ session, token });
+        session.userId = userId;
         console.log('session is', session);
-
-        await handleSupabaseSignIn({ session, token });
 
         return session
       },

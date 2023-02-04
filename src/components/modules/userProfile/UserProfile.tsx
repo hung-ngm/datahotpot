@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState, FC } from "react";
 import cn from "classnames";
 import styles from "./UserProfile.module.sass";
@@ -6,11 +7,12 @@ import {Icon} from "../../modules/icon";
 //import {Modal} from "../../modules/modal";
 import { FacebookShareButton, TwitterShareButton } from "react-share";
 import {TUP} from "./types";
+import { walletAddressShorterner } from "../../../../utils/walletAddressShorterner";
 
 const shareUrlFacebook = "https://ui8.net";
 const shareUrlTwitter = "https://ui8.net";
 
-const UserProfile: FC<TUP> = ({ className, item }) => {
+const UserProfile: FC<TUP> = ({ className, item, user }) => {
   const [visible, setVisible] = useState(false);
   const [visibleShare, setVisibleShare] = useState(false);
   const [visibleModalReport, setVisibleModalReport] = useState(false);
@@ -23,7 +25,7 @@ const UserProfile: FC<TUP> = ({ className, item }) => {
         </div>
         <div className={styles.name}>Enrico Cole</div>
         <div className={styles.code}>
-          <div className={styles.number}>0xc4c16a645...b21a</div>
+          <div className={styles.number}>{walletAddressShorterner(user.address)}</div>
           <button className={styles.copy}>
             <Icon name="copy" size="16" />
           </button>
@@ -54,7 +56,7 @@ const UserProfile: FC<TUP> = ({ className, item }) => {
             </a>
           ))}
         </div>
-        <div className={styles.note}>Member since Mar 15, 2021</div>
+        <div className={styles.note}>Member since Jan 1, 2023</div>
       </div>
       {/* <Modal
         visible={visibleModalReport}
