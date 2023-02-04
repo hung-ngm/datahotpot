@@ -85,7 +85,8 @@ export const storeDatasetThumbnail = async (e: any) => {
     const files = [imageFile];
     const cid = await storeWithProgress(files);
     console.log('Stored files with cid', cid);
+    const fileName = imageFile.name;
     
-    const thumbnailUrl = `https://${cid}.ipfs.w3s.link/`;
+    const thumbnailUrl = `https://${cid}.ipfs.w3s.link/${fileName}`;
     return thumbnailUrl;
 }
