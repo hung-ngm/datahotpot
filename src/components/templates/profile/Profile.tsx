@@ -12,7 +12,6 @@ import { bids } from "../../mock/bids";
 import { IProfile } from "./types";
 import { TNFTItem } from "../../../../types/NFTItem";
 
-
 const navLinks = [
   "On Sale",
   "Purchased",

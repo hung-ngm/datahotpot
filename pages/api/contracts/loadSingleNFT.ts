@@ -38,6 +38,7 @@ export const loadSingleDataNFT = async (id: number): Promise<TNFTItem> => {
         sources: metadata.data.sources,
         tags: metadata.data.tags,
         itemId: item.itemId.toNumber(),
+        thumbnailUrl: metadata.data.thumbnailUrl,
     }
 
     return singleItem;

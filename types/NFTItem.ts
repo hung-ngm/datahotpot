@@ -10,4 +10,5 @@ export type TNFTItem = {
     sources: string;
     tags: string[];
     itemId: number;
+    thumbnailUrl: string;
 }

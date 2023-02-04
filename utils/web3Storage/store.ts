@@ -12,7 +12,8 @@ const makeFileObjects = (
     context: string,
     contains: string,
     sources: string,
-    tags: SelectOption[]
+    tags: SelectOption[],
+    thumbnailUrl: string
 ) => {
     // You can create File objects from a Blob of binary data
     // see: https://developer.mozilla.org/en-US/docs/Web/API/Blob
@@ -27,7 +28,8 @@ const makeFileObjects = (
         context: context,
         contains: contains,
         sources: sources,
-        tags: tagsArr
+        tags: tagsArr,
+        thumbnailUrl: thumbnailUrl
     }
     const blob = new Blob([JSON.stringify(obj)], { type: 'application/json' })
   
@@ -66,13 +68,25 @@ export const storeMetadata = async (
     context: string,
     contains: string,
     sources: string,
-    tags: SelectOption[]
+    tags: SelectOption[],
+    thumbnailUrl: string,
 ) => {
     if (!name || !context || !contains || !sources || !tags) return;
-    const files = makeFileObjects(name, context, contains, sources, tags);
+    const files = makeFileObjects(name, context, contains, sources, tags, thumbnailUrl);
     const cid = await storeWithProgress(files);
     console.log('Stored files with cid', cid);
     
     const metadataUrl = `https://${cid}.ipfs.w3s.link/metadata.json`;
     return metadataUrl;
+}
+
+export const storeDatasetThumbnail = async (e: any) => {
+    const imageFile = e.target.files[0];  
+    const files = [imageFile];
+    const cid = await storeWithProgress(files);
+    console.log('Stored files with cid', cid);
+    const fileName = imageFile.name;
+    
+    const thumbnailUrl = `https://${cid}.ipfs.w3s.link/${fileName}`;
+    return thumbnailUrl;
 }

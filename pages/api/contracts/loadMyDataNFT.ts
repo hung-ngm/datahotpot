@@ -41,6 +41,7 @@ export const loadMyDataNFTs = async (address: string) : Promise<TNFTItem[]> => {
             sources: metadata.data.sources,
             tags: metadata.data.tags,
             itemId: i.itemId.toNumber(),
+            thumbnailUrl: metadata.data.thumbnailUrl,
         }
         return item
     }))

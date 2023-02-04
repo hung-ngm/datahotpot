@@ -12,7 +12,8 @@ import {Select} from "../../modules/select";
 import {FollowSteps} from "../../modules/followSteps";
 import { SelectOption, TRoyaltiesMap } from "./types";
 import { deployEncrypted } from "../../../../utils/lighthouse/upload";
-import { storeMetadata } from "../../../../utils/web3Storage/storeMetadata";
+import { storeMetadata, storeDatasetThumbnail } from "../../../../utils/web3Storage/store";
+
 
 const royaltiesOptions = ["2%", "5%", "10%"];
 
@@ -51,6 +52,7 @@ const UploadDatasetDetails:FC = () => {
 
   // Used in web3 storage metadata upload
   const [metadataUrl, setMetadataUrl] = useState<string>("");
+  const [thumbnailUrl, setThumbnailUrl] = useState<string>("");
 
   const handleDatasetUploaded = async (e: any) => {
     const res = await deployEncrypted(e);
@@ -60,10 +62,25 @@ const UploadDatasetDetails:FC = () => {
     setDataSize(Size);
     setFileName(Name);
   }
+
+  const handleThumbnailUploaded = async (e: any) => {
+    const datasetThumbnailUrl = await storeDatasetThumbnail(e);
+    console.log('Store dataset thumbnail with url', datasetThumbnailUrl);
+    if (datasetThumbnailUrl) {
+      setThumbnailUrl(datasetThumbnailUrl);
+    }
+  }
   
   const handleCreateItem = async () => {
     setVisibleModal(true);
-    const metadataUrl = await storeMetadata(dataName, dataContext, dataContains, sources, tags);
+    const metadataUrl = await storeMetadata(
+      dataName, 
+      dataContext, 
+      dataContains, 
+      sources, 
+      tags,
+      thumbnailUrl
+    );
     console.log('Store metadata with url', metadataUrl);
     if (metadataUrl) {
       setMetadataUrl(metadataUrl);
@@ -99,10 +116,32 @@ const UploadDatasetDetails:FC = () => {
                       <Icon name="upload-file" size="24" />
                     </div>
                     <div className={styles.format}>
-                      PNG, GIF, WEBP, MP4 or MP3. Max 1Gb.
+                      CSV, JSON, ... Max 1Gb.
                     </div>
                   </div>
                 </div>
+                <div className={styles.item}>
+                  <div className={styles.category}>Add dataset thumbnail</div>
+                  <div className={styles.note}>
+                    Drag or choose your file to upload
+                  </div>
+                  <div className={styles.file}>
+                    <input 
+                      onChange={async (e: any) => { 
+                        await handleThumbnailUploaded(e);
+                      }}
+                      className={styles.load} 
+                      type="file" 
+                    />
+                    <div className={styles.icon}>
+                      <Icon name="upload-file" size="24" />
+                    </div>
+                    <div className={styles.format}>
+                      PNG, JPEG
+                    </div>
+                  </div>
+                </div>
+
                 <div className={styles.item}>
                   <div className={styles.category}>Dataset Details</div>
                   <div className={styles.fieldset}>

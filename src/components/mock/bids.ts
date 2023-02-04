@@ -93,7 +93,8 @@ export const bids = [
     seller: "0xA63E675e404791E9C700a7af529D82Ad84d8177C",
     sources : "The tweets were scraped from Twitter and cover a range of topics related to the ChatGPT language model.",
     tags: ['NLP'],
-    tokenId: 1
+    tokenId: 1,
+    thumbnailUrl: "/images/content/card-pic-1.jpg" 
   }
 ]
   
