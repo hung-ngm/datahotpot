@@ -1,5 +1,5 @@
-import { Layout } from '../src/components/layout';
-import { ProfileEdit } from '../src/components/templates/profileEdit';
+import { Layout } from '../../../src/components/layout';
+import { ProfileEdit } from '../../../src/components/templates/profileEdit';
 
 const ProfileEditPage = () => {
     return (

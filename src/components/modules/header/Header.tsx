@@ -17,14 +17,6 @@ const nav = [
       url: "/issues",
       title: "Issues",
     },
-    // {
-    //   url: "/create/dataset",
-    //   title: "Create",
-    // },
-    // {
-    //   url: "/profile",
-    //   title: "Profile",
-    // },
 ];
 
 const Header: FC = () => {

@@ -207,7 +207,7 @@ const Profile: FC<IProfile> = ({ myDataNFTs, user }) => {
             </button>
             <CustomLink
               className={cn("button-stroke button-small", styles.button)}
-              href="profile-edit"
+              href={`/profile/${user.id}/edit`}
             >
               <span>Edit profile</span>
               <Icon name="image" size="16" />
