@@ -45,7 +45,16 @@ const Card: FC<TCard> = ({ className, item, text, isBuy }) => {
               <div className={styles.limitSize}>3 MB</div>
             </div>
             <div className={styles.avatar}>
-              <img src="/images/content/avatar-1.jpg" alt="Avatar" />
+              <img 
+                src={
+                  (isBuy && item.sellerAvatar) ? 
+                    item.sellerAvatar : 
+                    ((item.ownerAvatar) ? 
+                      item.ownerAvatar : 
+                      ("/images/content/avatar-user.jpg")
+                  )
+                  } 
+                alt="Avatar" />
             </div> 
         </div>
     </div>

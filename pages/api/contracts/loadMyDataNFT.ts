@@ -28,6 +28,8 @@ export const loadMyDataNFTs = async (address: string) : Promise<TNFTItem[]> => {
         console.log('metadata', metadata);
         const wei = ethers.utils.formatUnits(i.price.toString(), 'wei');
         console.log('price when fetching', i.price);
+        
+        const ownerAvatar = await axios.get(`/api/user/${i.owner.toLowerCase()}`);
 
         const item = {
             contract: i.nftContract,
@@ -42,6 +44,7 @@ export const loadMyDataNFTs = async (address: string) : Promise<TNFTItem[]> => {
             tags: metadata.data.tags,
             itemId: i.itemId.toNumber(),
             thumbnailUrl: metadata.data.thumbnailUrl,
+            ownerAvatar: ownerAvatar.data.avatar,
         }
         return item
     }))

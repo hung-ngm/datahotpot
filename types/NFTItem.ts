@@ -11,4 +11,6 @@ export type TNFTItem = {
     tags: string[];
     itemId: number;
     thumbnailUrl: string;
+    sellerAvatar?: string;
+    ownerAvatar?: string;
 }
