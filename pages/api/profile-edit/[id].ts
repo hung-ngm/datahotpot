@@ -1,14 +1,15 @@
 import { prisma } from "../../../lib/prismadb";
 
 export default async function handler(req: any, res: any) {
-    if (req.method === 'PATCH') {
+    if (req.method === 'PUT') {
         try {
             const { id } = req.query;
             const { 
                 name, 
                 bio, 
                 avatar, 
-                twitter 
+                twitter,
+                instagram 
             } = req.body;
             const user = await prisma.user.update({
                 where: { id },
@@ -16,7 +17,8 @@ export default async function handler(req: any, res: any) {
                     name,
                     bio,
                     avatar,
-                    twitter
+                    twitter,
+                    instagram
                 },
             });
             res.status(200).json(user);
@@ -28,7 +30,7 @@ export default async function handler(req: any, res: any) {
     
     // HTTP method not supported!
     else {
-      res.setHeader('Allow', ['PATCH']);
+      res.setHeader('Allow', ['PUT']);
       res
         .status(405)
         .json({ message: `HTTP method ${req.method} is not supported.` });
