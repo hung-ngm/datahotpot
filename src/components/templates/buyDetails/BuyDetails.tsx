@@ -10,27 +10,23 @@ import { buyNFT } from "../../../../pages/api/contracts/buyNFT";
 import { TNFTItem } from "../../../../types/NFTItem";
 import { TBuyDetails } from "./types";
 import { Button } from "../../modules/button";
+import useUserByAddress from "../../../hooks/useUserByAddress";
 
-const navLinks = ["Info", "Owners"];
-
-const users = [
-  {
-    name: "Raquel Will",
-    position: "Owner",
-    avatar: "/images/content/avatar-2.jpg",
-    reward: "/images/content/reward-1.svg",
-  },
-  {
-    name: "Selina Mayert",
-    position: "Creator",
-    avatar: "/images/content/avatar-1.jpg",
-  },
-];
+const navLinks = ["Seller"];
 
 const BuyDetails: FC<TBuyDetails> = ({ item }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [buyLoading, setBuyLoading] = useState<boolean>(false);
   const [buySuccess, setBuySuccess] = useState<boolean>(false);
+  const seller = useUserByAddress(item.seller.toLowerCase());
+
+  const users = [
+    {
+      name: seller?.name || "Unknown",
+      position: "Seller",
+      avatar: seller?.avatar || "/images/content/avatar-2.jpg",
+    },
+  ];
 
   const handleBuyItem = async (item: TNFTItem) => {
     setBuyLoading(true);

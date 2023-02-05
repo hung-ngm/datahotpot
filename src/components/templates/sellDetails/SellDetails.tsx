@@ -11,21 +11,7 @@ import { TSellDetails } from "./types";
 import useDataUrl from "../../../hooks/useDataUrl";
 import { Button } from "../../modules/button";
 
-const navLinks = ["Info", "Owners"];
-
-const users = [
-  {
-    name: "Raquel Will",
-    position: "Owner",
-    avatar: "/images/content/avatar-2.jpg",
-    reward: "/images/content/reward-1.svg",
-  },
-  {
-    name: "Selina Mayert",
-    position: "Creator",
-    avatar: "/images/content/avatar-1.jpg",
-  },
-];
+const navLinks = ["Owner"];
 
 const SellDetails: FC<TSellDetails> = ({ item }) => {
   console.log('sell details item', item);
@@ -130,21 +116,7 @@ const SellDetails: FC<TSellDetails> = ({ item }) => {
             <div className={styles.info}>
               {item.sources}
             </div>
-            <div className={styles.nav}>
-              {navLinks.map((x, index) => (
-                <button
-                  className={cn(
-                    { [styles.active]: index === activeIndex },
-                    styles.link
-                  )}
-                  onClick={() => setActiveIndex(index)}
-                  key={index}
-                >
-                  {x}
-                </button>
-              ))}
-            </div>
-            <UserItem className={styles.users} items={users} />
+            
           </div>
         </div>
       </div>
