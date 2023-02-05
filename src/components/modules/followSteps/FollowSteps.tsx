@@ -8,6 +8,7 @@ import {TF} from "./types"
 import { createDataNFT } from "../../../../pages/api/contracts/createDataNFT";
 import { mintDataNFT } from "../../../../pages/api/contracts/mintDataNFT";
 import { listDataNFT } from "../../../../pages/api/contracts/listDataNFT";
+import { Button } from "../button";
 
 const FollowSteps:FC<TF> = ({ 
   className, 
@@ -129,13 +130,13 @@ const FollowSteps:FC<TF> = ({
               <div className={styles.text}>Create data contract on the dataset</div>
             </div>
           </div>
-          {button(
-            contractLoading,
-            contractSuccess,
-            contractDisabled,
-            "Create", 
-            async () => { await handleCreateDataContract() }
-          )}
+          <Button
+            loading={contractLoading}
+            success={contractSuccess}
+            disabled={contractDisabled}
+            name="Create"
+            onClick={async () => { await handleCreateDataContract() }}
+          />
         </div>
 
         <div className={cn(styles.item)}>
@@ -148,13 +149,13 @@ const FollowSteps:FC<TF> = ({
               <div className={styles.text}>Mint NFT of the data contract</div>
             </div>
           </div>
-          {button(
-            mintLoading,
-            mintSuccess,
-            mintDisabled,
-            "Mint", 
-            async () => { await handleMintDataNFT() }
-          )}
+          <Button
+            loading={mintLoading}
+            success={mintSuccess}
+            disabled={mintDisabled}
+            name="Mint" 
+            onClick={async () => { await handleMintDataNFT() }}
+          />
         </div>
         
         <div className={styles.item}>
@@ -169,13 +170,13 @@ const FollowSteps:FC<TF> = ({
               </div>
             </div>
           </div>
-          {button(
-            sellLoading,
-            sellSuccess,
-            sellDisabled,
-            "Sell",
-            async () => { await handleSellNFT() }
-          )}
+          <Button
+            loading={sellLoading}
+            success={sellSuccess}
+            disabled={sellDisabled}
+            name="Sell"
+            onClick={async () => { await handleSellNFT() }}
+          />
         </div>
         
         
