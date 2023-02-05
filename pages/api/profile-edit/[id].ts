@@ -9,7 +9,8 @@ export default async function handler(req: any, res: any) {
                 bio, 
                 avatar, 
                 twitter,
-                instagram 
+                instagram,
+                facebook 
             } = req.body;
             const user = await prisma.user.update({
                 where: { id },
@@ -18,7 +19,8 @@ export default async function handler(req: any, res: any) {
                     bio,
                     avatar,
                     twitter,
-                    instagram
+                    instagram,
+                    facebook
                 },
             });
             res.status(200).json(user);
