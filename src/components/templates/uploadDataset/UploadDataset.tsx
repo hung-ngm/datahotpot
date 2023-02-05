@@ -38,9 +38,7 @@ const UploadDataset:FC = () => {
           <div className={styles.top}>
             <h1 className={cn("h2", styles.title)}>Upload item</h1>
             <div className={styles.info}>
-              Choose <span>“Single”</span> if you want your collectible to be
-              one of a kind or <span>“Multiple”</span> if you want to sell one
-              collectible multiple times
+              Choose <span>“New Dataset”</span> if you want to create new dataset on sale or <span>“New Issue”</span> if you want to create new issue
             </div>
           </div>
           <div className={styles.list}>

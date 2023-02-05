@@ -42,7 +42,7 @@ const UploadDatasetDetails:FC = () => {
   const [visibleModal, setVisibleModal] = useState(false);
   const [visiblePreview, setVisiblePreview] = useState(false);
 
-  const [tags, setTags] = useState<SelectOption[]>([options[0]])
+  const [tags, setTags] = useState<SelectOption[]>([])
   const [price, setPrice] = useState<string>("");
   
   // Used in lighthouse upload
@@ -248,6 +248,10 @@ const UploadDatasetDetails:FC = () => {
           <Preview
             className={cn(styles.preview, { [styles.active]: visiblePreview })}
             onClose={() => setVisiblePreview(false)}
+            dataName = {dataName}
+            price = {price}
+            thumbnailUrl = {thumbnailUrl}
+            dataSize = {dataSize}
           />
         </div>
       </div>
