@@ -13,7 +13,7 @@ import { IProfile } from "./types";
 import { TNFTItem } from "../../../../types/NFTItem";
 
 const navLinks = [
-  "On Sale",
+  // "On Sale",
   "Purchased",
   "Issues",
   "Likes",
@@ -251,15 +251,8 @@ const Profile: FC<IProfile> = ({ myDataNFTs, user }) => {
             </div>
             <div className={styles.group}>
               <div className={styles.item}>
-                {activeIndex === 0 && (
-                  <Items 
-                    className={styles.items} 
-                    items={bids.slice(0, 3)} 
-                    cardName="Buy"
-                    isBuy={true}
-                  />
-                )}
-                {(activeIndex === 1 && myDataNFTs) && (
+                
+                {(activeIndex === 0 && myDataNFTs) && (
                   <Items 
                     className={styles.items} 
                     items={myDataNFTs.slice(0, 6)} 
@@ -267,10 +260,10 @@ const Profile: FC<IProfile> = ({ myDataNFTs, user }) => {
                     isBuy={false}
                   />
                 )}
-                {activeIndex === 2 && (
+                {activeIndex === 1 && (
                   <></>
                 )}
-                {activeIndex === 3 && (
+                {activeIndex === 2 && (
                   <></>
                 )}
               </div>

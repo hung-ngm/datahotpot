@@ -6,6 +6,7 @@ import {TCard} from './types';
 import styles from "./Card.module.sass";
 import { Icon } from "../icon";
 import Interpunct from "react-interpunct";
+import { getFileSize } from "../../../../utils/getFileSize";
 
 const Card: FC<TCard> = ({ className, item, text, isBuy }) => {
   console.log('card item', item);
@@ -40,9 +41,9 @@ const Card: FC<TCard> = ({ className, item, text, isBuy }) => {
         </div>
         <div className={styles.foot}>
             <div className = {styles.line2}>
-              <div className={styles.files}>1 file (CSV)</div>
+              <div className={styles.files}>{item.fileName}</div>
               <Interpunct></Interpunct>
-              <div className={styles.limitSize}>3 MB</div>
+              <div className={styles.limitSize}>{getFileSize(item.fileSize)}</div>
             </div>
             <div className={styles.avatar}>
               <img 
