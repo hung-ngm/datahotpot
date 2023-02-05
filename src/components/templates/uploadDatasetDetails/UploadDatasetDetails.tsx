@@ -73,17 +73,21 @@ const UploadDatasetDetails:FC = () => {
   
   const handleCreateItem = async () => {
     setVisibleModal(true);
-    const metadataUrl = await storeMetadata(
-      dataName, 
-      dataContext, 
-      dataContains, 
-      sources, 
-      tags,
-      thumbnailUrl
-    );
-    console.log('Store metadata with url', metadataUrl);
-    if (metadataUrl) {
-      setMetadataUrl(metadataUrl);
+    if (dataSize) {
+      const metadataUrl = await storeMetadata(
+        dataName, 
+        dataContext, 
+        dataContains, 
+        sources, 
+        tags,
+        thumbnailUrl,
+        fileName,
+        dataSize
+      );
+      console.log('Store metadata with url', metadataUrl);
+      if (metadataUrl) {
+        setMetadataUrl(metadataUrl);
+      }
     }
   }
 

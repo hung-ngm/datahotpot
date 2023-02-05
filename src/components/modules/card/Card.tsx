@@ -2,13 +2,14 @@
 import React, { FC } from "react";
 import Link from "next/link";
 import cn from "classnames";
-import { CustomLink } from "../customLink/index";
 import {TCard} from './types';
 import styles from "./Card.module.sass";
 import { Icon } from "../icon";
 import Interpunct from "react-interpunct";
+import { getFileSize } from "../../../../utils/getFileSize";
 
 const Card: FC<TCard> = ({ className, item, text, isBuy }) => {
+  console.log('card item', item);
   const href: string = (isBuy) ? ("/buy-details/" + item.itemId) : ("/sell-details/" + item.itemId);
 
   return (
@@ -40,12 +41,21 @@ const Card: FC<TCard> = ({ className, item, text, isBuy }) => {
         </div>
         <div className={styles.foot}>
             <div className = {styles.line2}>
-              <div className={styles.files}>1 file (CSV)</div>
+              <div className={styles.files}>{item.fileName}</div>
               <Interpunct></Interpunct>
-              <div className={styles.limitSize}>3 MB</div>
+              <div className={styles.limitSize}>{getFileSize(item.fileSize)}</div>
             </div>
             <div className={styles.avatar}>
-              <img src="/images/content/avatar-1.jpg" alt="Avatar" />
+              <img 
+                src={
+                  (isBuy && item.sellerAvatar) ? 
+                    item.sellerAvatar : 
+                    ((item.ownerAvatar) ? 
+                      item.ownerAvatar : 
+                      ("/images/content/avatar-user.jpg")
+                  )
+                  } 
+                alt="Avatar" />
             </div> 
         </div>
     </div>

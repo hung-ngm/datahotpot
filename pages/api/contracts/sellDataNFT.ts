@@ -20,6 +20,9 @@ export const resellDataNFT = async (
             signer
         );
 
+        console.log('nft to sell', nft);
+        console.log('new price', newPrice);
+
         const transaction = await datahotpotMarketplace.putItemToResell(nft.contract, nft.itemId, newPrice,
             {
                 gasLimit: 40000000,

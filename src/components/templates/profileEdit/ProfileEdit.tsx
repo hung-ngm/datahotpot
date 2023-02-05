@@ -10,6 +10,7 @@ import {Icon} from "../../modules/icon";
 import { IProfileEdit } from "./types";
 import { Button } from "../../modules/button";
 import axios from "axios";
+import { toast } from 'react-hot-toast';
 
 const ProfileEdit: FC<IProfileEdit> = ({ user }) => {
   const [name, setName] = useState<string>(user.name);
@@ -19,6 +20,10 @@ const ProfileEdit: FC<IProfileEdit> = ({ user }) => {
   const [instagram, setInstagram] = useState<string>(user.instagram);
   const [editLoading, setEditLoading] = useState<boolean>(false);
   const [editSuccess, setEditSuccess] = useState<boolean>(false);
+  const [avatarUrl, setAvatarUrl] = useState<string>(user.avatar);
+  const [image, setImage] = useState<any>();
+
+  const sizeLimit = 10 * 1024 * 1024 // 10MB
 
   const router = useRouter();
   const { id } = router.query;
@@ -33,6 +38,49 @@ const ProfileEdit: FC<IProfileEdit> = ({ user }) => {
     },
   ];
 
+  const handleAvatarUpload = async (image: any) => {
+    if (!image) return;
+
+    let toastId;
+    try {
+      toastId = toast.loading('Uploading...');
+      const { data } = await axios.post('/api/image-upload', { image });
+      setAvatarUrl(data?.url);
+      toast.success('Successfully uploaded', { id: toastId });
+    } catch (e) {
+      toast.error('Unable to upload', { id: toastId });
+      setAvatarUrl('');
+    } 
+  };
+  
+
+  const handleOnChangeAvatar = (e: any) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    const fileName = file?.name?.split('.')?.[0] ?? 'New file';
+
+    reader.addEventListener(
+      'load',
+      async function () {
+        try {
+          setImage({ src: reader.result, alt: fileName });
+          await handleAvatarUpload(reader.result);
+          
+        } catch (err) {
+          toast.error('Unable to update image');
+        }
+      },
+      false
+    );
+
+    if (file) {
+      if (file.size <= sizeLimit) {
+        reader.readAsDataURL(file);
+      } 
+    }
+  };
+
   const handleUpdateProfile = async () => {
     setEditLoading(true);
     try {
@@ -41,7 +89,8 @@ const ProfileEdit: FC<IProfileEdit> = ({ user }) => {
         bio,
         facebook,
         twitter,
-        instagram
+        instagram,
+        avatar: avatarUrl
       }
   
       const res = await axios.put(`/api/profile-edit/${id}`, data);
@@ -73,7 +122,7 @@ const ProfileEdit: FC<IProfileEdit> = ({ user }) => {
             <div className={styles.col}>
               <div className={styles.user}>
                 <div className={styles.avatar}>
-                  <img src="/images/content/avatar-1.jpg" alt="Avatar" />
+                  <img src={image?.src ? image?.src : (avatarUrl ? avatarUrl: "/images/content/avatar-1.jpg")} alt="Avatar" />
                 </div>
                 <div className={styles.details}>
                   <div className={styles.stage}>Profile photo</div>
@@ -92,7 +141,7 @@ const ProfileEdit: FC<IProfileEdit> = ({ user }) => {
                     >
                       Upload
                     </button>
-                    <input className={styles.load} type="file" />
+                    <input className={styles.load} type="file" onChange={handleOnChangeAvatar} />
                   </div>
                 </div>
               </div>

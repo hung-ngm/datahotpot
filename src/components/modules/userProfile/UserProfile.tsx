@@ -17,7 +17,7 @@ const UserProfile: FC<TUP> = ({ className, socials, user }) => {
     <>
       <div className={cn(styles.user, className)}>
         <div className={styles.avatar}>
-          <img src="/images/content/avatar-big.jpg" alt="Avatar" />
+          <img src={user.avatar ? user.avatar : "/images/content/avatar-big.jpg"} alt="Avatar" />
         </div>
         <div className={styles.name}>{user.name ? user.name : "Unamed"}</div>
         <div className={styles.code}>

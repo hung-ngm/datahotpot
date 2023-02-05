@@ -24,7 +24,7 @@ const User: FC<TU> = ({ className }) => {
         <div className={cn(styles.user, className)}>
         <div className={styles.head} onClick={() => setVisible(!visible)}>
           <div className={styles.avatar}>
-            <img src="/images/content/avatar-user.jpg" alt="Avatar" />
+            <img src={userProfile.avatar ? userProfile.avatar : "/images/content/avatar-user.jpg"} alt="Avatar" />
           </div>
           <div className={styles.wallet}>
             7.00698 <span className={styles.currency}>ETH</span>
