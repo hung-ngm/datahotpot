@@ -14,7 +14,7 @@ const SlickArrow: FC<TSlide> = ({children, ...props }) => (
 );
 const dateOptions = ["Newest", "Oldest"];
 const likesOptions = ["Most liked", "Least liked"];
-const categoryOptions = ["All Category", "Music", "University", "Entertainment", "Science"];
+const categoryOptions = ["Music", "Movie", "University", "Education", "NLP"];
 const creatorOptions = ["Verified only", "All", "Most liked"];
 
 const Discovery: FC<IDiscovery> = ({ dataNFTs }) => {
@@ -105,15 +105,33 @@ const Discovery: FC<IDiscovery> = ({ dataNFTs }) => {
           </form>
         </div>
         <div className={styles.wrapper}> 
-            
-            {categoryOptions.map((x, index) => (
+            <div className={styles.arow}>
+                <div className={styles.tag}>
+                  <Icon name="lightning" size="20" />
+                  <div>All Categories</div>
+                </div>
+                <Slider className="popular-slider" {...settings}>
+                    {dataNFTs?.map((x, index) => (
+                        <Card 
+                          className={styles.card} 
+                          text="Buy"
+                          item={x} 
+                          key={index} 
+                          isBuy={true}
+                        />
+                    ))}
+                </Slider>
+            </div>
+            {categoryOptions.map((category, index) => (
                 <div key={index} className={styles.arow}>
                     <div className={styles.tag}>
-                        <Icon name="lightning" size="20" />
-                        <div>{x}</div>
+                      <Icon name="lightning" size="20" />
+                      <div>{category}</div>
                     </div>
                     <Slider className="popular-slider" {...settings}>
-                        {dataNFTs?.map((x, index) => (
+                      {
+                        dataNFTs?.filter((nft) => nft.tags.includes(category))
+                          .map((x, index) => (
                             <Card 
                               className={styles.card} 
                               text="Buy"
@@ -121,7 +139,8 @@ const Discovery: FC<IDiscovery> = ({ dataNFTs }) => {
                               key={index} 
                               isBuy={true}
                             />
-                        ))}
+                        ))
+                      }
                     </Slider>
                 </div>
             ))}
