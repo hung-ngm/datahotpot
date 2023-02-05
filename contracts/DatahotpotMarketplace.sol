@@ -176,7 +176,7 @@ contract DatahotpotMarketplace is ReentrancyGuard {
         require(newPrice > 0, "Price must be at least 1 wei");
         require(msg.value == listingPrice, "Price must be equal to listing price");
 
-        DataNFT(nftContract).transferFrom(msg.sender, address(this), tokenId);
+        IERC721(nftContract).transferFrom(msg.sender, address(this), tokenId);
 
         address payable oldOwner = idToMarketItem[itemId].owner;
         idToMarketItem[itemId].owner = payable(address(0));

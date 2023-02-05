@@ -79,7 +79,9 @@ const UploadDatasetDetails:FC = () => {
       dataContains, 
       sources, 
       tags,
-      thumbnailUrl
+      thumbnailUrl,
+      fileName,
+      dataSize
     );
     console.log('Store metadata with url', metadataUrl);
     if (metadataUrl) {

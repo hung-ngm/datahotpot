@@ -5,12 +5,11 @@ import cn from "classnames";
 import styles from "./SellDetails.module.sass";
 import {UserItem} from "../../modules/userItem";
 import { TextInput } from "../../modules/textInput";
-// import Control from "./Control";
-// import Options from "./Options";
 import { resellDataNFT } from "../../../../pages/api/contracts/sellDataNFT";
 import { TNFTItem } from "../../../../types/NFTItem";
 import { TSellDetails } from "./types";
 import useDataUrl from "../../../hooks/useDataUrl";
+import { Button } from "../../modules/button";
 
 const navLinks = ["Info", "Owners"];
 
@@ -32,10 +31,21 @@ const SellDetails: FC<TSellDetails> = ({ item }) => {
   console.log('sell details item', item);
   const [activeIndex, setActiveIndex] = useState(0);
   const [price, setPrice] = useState<string>("");
+  const [sellLoading, setSellLoading] = useState<boolean>(false);
+  const [sellSuccess, setSellSuccess] = useState<boolean>(false);
 
   const handleSellItem = async (item: TNFTItem) => {
+    setSellLoading(true);
+    console.log('new price', Number(price))
     const res = await resellDataNFT(item, Number(price));
     console.log('sell res', res);
+    if (res) {
+      setSellLoading(false);
+      setSellSuccess(true);
+    } else {
+      setSellLoading(false);
+      setSellSuccess(false);
+    }
   }
 
   const dataUrl = useDataUrl(item);
@@ -63,8 +73,9 @@ const SellDetails: FC<TSellDetails> = ({ item }) => {
               )}
             </div>
             <div className={styles.cost}>
-              <div className={styles.fieldset}>
-                <TextInput
+              <div className={styles.col}>
+                <div className={styles.fieldset}>
+                  <TextInput
                     className={styles.field}
                     label="Price"
                     name="Price"
@@ -73,14 +84,19 @@ const SellDetails: FC<TSellDetails> = ({ item }) => {
                     required
                     value={price}
                     onChange={(e: any) => setPrice(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className={styles.col}>
+                <Button
+                  loading={sellLoading}
+                  success={sellSuccess}
+                  disabled={false}
+                  name="Sell now"
+                  onClick={async () => { handleSellItem(item) }}
                 />
               </div>
-              <button 
-                className={cn("button", styles.button)}
-                onClick={async () => { handleSellItem(item) }}
-              >
-                Sell Now
-              </button>
+    
             </div>
             <h2 className={cn("h3", styles.title)}>Data Contract</h2>
             <div className={styles.info}>

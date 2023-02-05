@@ -50,6 +50,8 @@ export const deployEncrypted = async(e: any) =>{
         progressCallback
     );
 
+    console.log('lighthouse response', response);
+
     const DataUrl = "https://files.lighthouse.storage/viewFile/" + response.data.Hash;
     const Size = Number(response.data.Size) / 1000;
     const Name = response.data.Name;

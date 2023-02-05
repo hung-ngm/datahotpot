@@ -13,7 +13,9 @@ const makeFileObjects = (
     contains: string,
     sources: string,
     tags: SelectOption[],
-    thumbnailUrl: string
+    thumbnailUrl: string,
+    fileName: string,
+    fileSize: number,
 ) => {
     // You can create File objects from a Blob of binary data
     // see: https://developer.mozilla.org/en-US/docs/Web/API/Blob
@@ -29,7 +31,9 @@ const makeFileObjects = (
         contains: contains,
         sources: sources,
         tags: tagsArr,
-        thumbnailUrl: thumbnailUrl
+        thumbnailUrl: thumbnailUrl,
+        fileName: fileName,
+        fileSize: fileSize,
     }
     const blob = new Blob([JSON.stringify(obj)], { type: 'application/json' })
   
@@ -70,9 +74,11 @@ export const storeMetadata = async (
     sources: string,
     tags: SelectOption[],
     thumbnailUrl: string,
+    fileName: string,
+    fileSize: number,
 ) => {
     if (!name || !context || !contains || !sources || !tags) return;
-    const files = makeFileObjects(name, context, contains, sources, tags, thumbnailUrl);
+    const files = makeFileObjects(name, context, contains, sources, tags, thumbnailUrl, fileName, fileSize);
     const cid = await storeWithProgress(files);
     console.log('Stored files with cid', cid);
     

@@ -1,1 +1,1 @@
-export const datahotpotMarketplaceAddress = "0x82D42378eFECC57303348aA711D67d45BB6033De";
+export const datahotpotMarketplaceAddress = "0xe7294A1B175E2DEeA76376C1BeaCb044C20d37eA";
