@@ -2,7 +2,7 @@ import { TUser } from "../../../../types/user"
 
 export type TUP = {
     className: string,
-    item: Array<Social>,
+    socials: Array<Social>,
     user: TUser
 }
 
