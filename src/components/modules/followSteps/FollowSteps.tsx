@@ -2,12 +2,11 @@ import React, {FC, useState, useEffect} from "react";
 import cn from "classnames";
 import styles from "./FollowSteps.module.sass";
 import {Icon} from "../../modules/icon";
-import {Loader} from "../../modules/loader";
-import {LoaderCircle} from "../loaderCircle";
 import {TF} from "./types"
 import { createDataNFT } from "../../../../pages/api/contracts/createDataNFT";
 import { mintDataNFT } from "../../../../pages/api/contracts/mintDataNFT";
 import { listDataNFT } from "../../../../pages/api/contracts/listDataNFT";
+import { Button } from "../button";
 
 const FollowSteps:FC<TF> = ({ 
   className, 
@@ -84,36 +83,6 @@ const FollowSteps:FC<TF> = ({
     }
   }, [metadata])
 
-  const button = (
-    loading: boolean, 
-    success: boolean, 
-    disabled: boolean,
-    name: string, 
-    onClick: (e: any) => void
-  ): any => {
-    if (loading && !success) {
-      return (
-        <button className={cn("button loading", styles.button)}>
-          <Loader className={styles.loader} color="white" />
-        </button>
-      )
-    } else if (!loading && success) {
-      return (
-        <button className={cn("button done", styles.button)}>Done</button>
-      )
-    } else if (disabled) {
-      return (
-        <button className={cn("button disabled", styles.button)}>{name}</button>
-      )
-    } 
-    else {
-      return (
-        <button onClick={onClick} className={cn("button", styles.button)}>{name}</button>
-      )
-    }
-  }
-
-
   return (
     <div className={cn(className, styles.steps)}>
       <div className={cn("h4", styles.title)}>Folow steps</div>
@@ -129,13 +98,13 @@ const FollowSteps:FC<TF> = ({
               <div className={styles.text}>Create data contract on the dataset</div>
             </div>
           </div>
-          {button(
-            contractLoading,
-            contractSuccess,
-            contractDisabled,
-            "Create", 
-            async () => { await handleCreateDataContract() }
-          )}
+          <Button
+            loading={contractLoading}
+            success={contractSuccess}
+            disabled={contractDisabled}
+            name="Create"
+            onClick={async () => { await handleCreateDataContract() }}
+          />
         </div>
 
         <div className={cn(styles.item)}>
@@ -148,13 +117,13 @@ const FollowSteps:FC<TF> = ({
               <div className={styles.text}>Mint NFT of the data contract</div>
             </div>
           </div>
-          {button(
-            mintLoading,
-            mintSuccess,
-            mintDisabled,
-            "Mint", 
-            async () => { await handleMintDataNFT() }
-          )}
+          <Button
+            loading={mintLoading}
+            success={mintSuccess}
+            disabled={mintDisabled}
+            name="Mint" 
+            onClick={async () => { await handleMintDataNFT() }}
+          />
         </div>
         
         <div className={styles.item}>
@@ -169,13 +138,13 @@ const FollowSteps:FC<TF> = ({
               </div>
             </div>
           </div>
-          {button(
-            sellLoading,
-            sellSuccess,
-            sellDisabled,
-            "Sell",
-            async () => { await handleSellNFT() }
-          )}
+          <Button
+            loading={sellLoading}
+            success={sellSuccess}
+            disabled={sellDisabled}
+            name="Sell"
+            onClick={async () => { await handleSellNFT() }}
+          />
         </div>
         
         

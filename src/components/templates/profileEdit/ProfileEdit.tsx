@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { FC , useState } from "react";
 import { useRouter } from "next/router";
 import cn from "classnames";
@@ -7,6 +8,7 @@ import {TextInput} from "../../modules/textInput";
 import {TextArea} from "../../modules/textArea";
 import {Icon} from "../../modules/icon";
 import { IProfileEdit } from "./types";
+import { Button } from "../../modules/button";
 import axios from "axios";
 
 const ProfileEdit: FC<IProfileEdit> = ({ user }) => {
@@ -15,6 +17,8 @@ const ProfileEdit: FC<IProfileEdit> = ({ user }) => {
   const [facebook, setFacebook] = useState<string>(user.facebook);
   const [twitter, setTwitter] = useState<string>(user.twitter);
   const [instagram, setInstagram] = useState<string>(user.instagram);
+  const [editLoading, setEditLoading] = useState<boolean>(false);
+  const [editSuccess, setEditSuccess] = useState<boolean>(false);
 
   const router = useRouter();
   const { id } = router.query;
@@ -30,6 +34,7 @@ const ProfileEdit: FC<IProfileEdit> = ({ user }) => {
   ];
 
   const handleUpdateProfile = async () => {
+    setEditLoading(true);
     try {
       const data = {
         name,
@@ -41,8 +46,13 @@ const ProfileEdit: FC<IProfileEdit> = ({ user }) => {
   
       const res = await axios.put(`/api/profile-edit/${id}`, data);
       console.log('update profile res', res);
+      setEditLoading(false);
+      setEditSuccess(true);
+      router.push(`/profile/${id}`);
     } catch (err) {
       console.log(err);
+      setEditLoading(false);
+      setEditSuccess(false);
     }
   }
 
@@ -155,21 +165,15 @@ const ProfileEdit: FC<IProfileEdit> = ({ user }) => {
               </div>
               
               <div className={styles.btns}>
-                <button 
-                  className={cn("button", styles.button)}
+                <Button
+                  loading={editLoading}
+                  success={editSuccess}
+                  disabled={false}
+                  name="Update Profile"
                   onClick={async () => {
                     await handleUpdateProfile();
                   }}
-                >
-                  Update Profile
-                </button>
-                <button
-                  className={styles.clear}
-                  
-                >
-                  <Icon name="circle-close" size="24" />
-                  Clear all
-                </button>
+                />
               </div>
             </div>
           </div>
