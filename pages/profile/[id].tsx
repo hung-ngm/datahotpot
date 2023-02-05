@@ -1,15 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import { Layout } from '../../src/components/layout';
 import { Profile } from '../../src/components/templates/profile';
-import { useSession, getSession } from "next-auth/react";
-import { useState, useEffect } from "react";
-import { TNFTItem } from '../../types/NFTItem';
-import { TUser } from '../../types/user';
-import { loadMyDataNFTs } from '.././api/contracts/loadMyDataNFT';
+import { useSession } from "next-auth/react";
 import { prisma } from '../../lib/prismadb';
 import { IProfile } from '../../src/components/templates/profile/types';
+import useMyDataNFTs from '../../src/hooks/useMyDataNFTs';
 
 // Extend the built-in session type
 declare module "next-auth" {
@@ -51,30 +47,7 @@ export const getServerSideProps = async ({ params } : any) => {
 
 const ProfilePage: NextPage<IProfile> = ({ user }) => {
     const { data: session } = useSession();
-    const [myDataNFTs, setMyDataNFTs] = useState<TNFTItem[]>();
-    const router = useRouter();
-
-    const loadMyNFTs = async () => {
-        if (session?.user) {
-            const address = session.user.name;
-            
-            if (address) {
-                const items = await loadMyDataNFTs(address);
-                console.log('my items', items);
-                setMyDataNFTs(items);
-            }
-        }
-    }
-
-    useEffect(() => {
-        if (!session) {
-            router.push('/login');
-        }
-        if (myDataNFTs) {
-            return;
-        }
-        loadMyNFTs();
-    }, [myDataNFTs])
+    const myDataNFTs = useMyDataNFTs();
 
     if (session?.user) {
         return (

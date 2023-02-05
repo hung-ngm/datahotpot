@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState, useEffect, FC } from "react";
+import React, { useState, FC } from "react";
 import { CustomLink } from "../../modules/customLink";
 import cn from "classnames";
 import styles from "./SellDetails.module.sass";
@@ -8,9 +8,9 @@ import { TextInput } from "../../modules/textInput";
 // import Control from "./Control";
 // import Options from "./Options";
 import { resellDataNFT } from "../../../../pages/api/contracts/sellDataNFT";
-import { getDataUrl } from "../../../../pages/api/contracts/getDataUrl";
 import { TNFTItem } from "../../../../types/NFTItem";
 import { TSellDetails } from "./types";
+import useDataUrl from "../../../hooks/useDataUrl";
 
 const navLinks = ["Info", "Owners"];
 
@@ -32,28 +32,13 @@ const SellDetails: FC<TSellDetails> = ({ item }) => {
   console.log('sell details item', item);
   const [activeIndex, setActiveIndex] = useState(0);
   const [price, setPrice] = useState<string>("");
-  const [dataUrl, setDataUrl] = useState<string>("")
 
   const handleSellItem = async (item: TNFTItem) => {
     const res = await resellDataNFT(item, Number(price));
     console.log('sell res', res);
   }
 
-  const getDatasetUrl = async (item: TNFTItem) => {
-    const dataUrl = await getDataUrl(item);
-    console.log('dataUrl', dataUrl);
-    if (dataUrl) {
-      setDataUrl(dataUrl);
-    }
-  }
-
-  useEffect(() => {
-    if (dataUrl) {
-      console.log('dataUrl', dataUrl)
-      return;
-    }
-    getDatasetUrl(item);
-  }, [dataUrl])
+  const dataUrl = useDataUrl(item);
 
   return (
     <>
