@@ -9,6 +9,7 @@ import {UserItem} from "../../modules/userItem";
 import { buyNFT } from "../../../../pages/api/contracts/buyNFT";
 import { TNFTItem } from "../../../../types/NFTItem";
 import { TBuyDetails } from "./types";
+import { Button } from "../../modules/button";
 
 const navLinks = ["Info", "Owners"];
 
@@ -28,10 +29,20 @@ const users = [
 
 const BuyDetails: FC<TBuyDetails> = ({ item }) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [buyLoading, setBuyLoading] = useState<boolean>(false);
+  const [buySuccess, setBuySuccess] = useState<boolean>(false);
 
   const handleBuyItem = async (item: TNFTItem) => {
+    setBuyLoading(true);
     const res = await buyNFT(item);
     console.log('buy res', res);
+    if (res) {
+      setBuyLoading(false);
+      setBuySuccess(true);
+    } else {
+      setBuyLoading(false);
+      setBuySuccess(false);
+    }
   }
 
   return (
@@ -57,13 +68,22 @@ const BuyDetails: FC<TBuyDetails> = ({ item }) => {
               )}
             </div>
             <div className={styles.cost}>
-              <div className={cn("status-stroke-green", styles.price)}>
-                {item.price} FIL
+              <div className={styles.col}>
+                <div className={cn("status-stroke-green", styles.price)}>
+                  {item.price} FIL
+                </div>
               </div>
-              <button 
-                className={cn("button", styles.button)}
-                onClick={async () => { await handleBuyItem(item) }}
-              >Purchase Now</button>
+              <div className={styles.col}>
+                <Button
+                  loading={buyLoading}
+                  success={buySuccess}
+                  disabled={false}
+                  name="Purchase Now"
+                  onClick={async () => { await handleBuyItem(item) }}
+                />
+              </div>
+              
+              
             </div>
             <h2 className={cn("h3", styles.title)}>Data Contract</h2>
             <div className={styles.info}>

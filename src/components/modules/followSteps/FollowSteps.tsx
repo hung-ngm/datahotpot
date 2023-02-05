@@ -2,8 +2,6 @@ import React, {FC, useState, useEffect} from "react";
 import cn from "classnames";
 import styles from "./FollowSteps.module.sass";
 import {Icon} from "../../modules/icon";
-import {Loader} from "../../modules/loader";
-import {LoaderCircle} from "../loaderCircle";
 import {TF} from "./types"
 import { createDataNFT } from "../../../../pages/api/contracts/createDataNFT";
 import { mintDataNFT } from "../../../../pages/api/contracts/mintDataNFT";
@@ -84,36 +82,6 @@ const FollowSteps:FC<TF> = ({
       setContractDisabled(false);
     }
   }, [metadata])
-
-  const button = (
-    loading: boolean, 
-    success: boolean, 
-    disabled: boolean,
-    name: string, 
-    onClick: (e: any) => void
-  ): any => {
-    if (loading && !success) {
-      return (
-        <button className={cn("button loading", styles.button)}>
-          <Loader className={styles.loader} color="white" />
-        </button>
-      )
-    } else if (!loading && success) {
-      return (
-        <button className={cn("button done", styles.button)}>Done</button>
-      )
-    } else if (disabled) {
-      return (
-        <button className={cn("button disabled", styles.button)}>{name}</button>
-      )
-    } 
-    else {
-      return (
-        <button onClick={onClick} className={cn("button", styles.button)}>{name}</button>
-      )
-    }
-  }
-
 
   return (
     <div className={cn(className, styles.steps)}>
