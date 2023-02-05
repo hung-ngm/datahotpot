@@ -5,7 +5,7 @@ import {Icon} from "../icon";
 import {TPreview} from "./types";
 import Interpunct from "react-interpunct";
 
-const Preview: FC<TPreview> = ({ className, onClose }) => {
+const Preview: FC<TPreview> = ({ className, onClose, dataName, price, thumbnailUrl, dataSize }) => {
   return (
     <div className={cn(className, styles.wrap)}>
       <div className={styles.inner}>
@@ -16,7 +16,7 @@ const Preview: FC<TPreview> = ({ className, onClose }) => {
         <div className={styles.card}>
           <div className={styles.preview}>
             <img
-              srcSet="/images/content/card-pic-6.jpg"
+              srcSet={thumbnailUrl}
               src="/images/content/card-pic-6@2x.jpg"
               alt="Card"
             />
@@ -24,15 +24,15 @@ const Preview: FC<TPreview> = ({ className, onClose }) => {
           <div className={styles.link}>
             <div className={styles.body}>
               <div className={styles.line}>
-                <div className={styles.title}>Black Golden Tiger</div>
-                <div className={styles.price}>2.45 ETH</div>
+                <div className={styles.title}>{dataName?dataName:"Set yout dataset name"}</div>
+                <div className={styles.price}>{price} ETH</div>
               </div>
             </div>
             <div className={styles.foot}>
               <div className = {styles.line2}>
                   <div className={styles.files}>1 file (CSV)</div>
                   <Interpunct> </Interpunct>
-                  <div className={styles.limitSize}>3 MB</div>
+                  <div className={styles.limitSize}>{dataSize} MB</div>
               </div>
               <div className={styles.avatar}>
                   <img src="/images/content/avatar-3.jpg" alt="Avatar" />
@@ -40,10 +40,6 @@ const Preview: FC<TPreview> = ({ className, onClose }) => {
             </div>
           </div>
         </div>
-        <button className={styles.clear}>
-          <Icon name="circle-close" size="24" />
-          Clear all
-        </button>
       </div>
     </div>
   );

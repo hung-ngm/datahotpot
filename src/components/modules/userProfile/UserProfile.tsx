@@ -8,8 +8,11 @@ import {Icon} from "../../modules/icon";
 import { FacebookShareButton, TwitterShareButton } from "react-share";
 import {TUP} from "./types";
 import { walletAddressShorterner } from "../../../../utils/walletAddressShorterner";
+import { createdAt } from "../../../../utils/createdAt";
 
 const UserProfile: FC<TUP> = ({ className, socials, user }) => {
+
+  console.log(user);
   return (
     <>
       <div className={cn(styles.user, className)}>
@@ -40,7 +43,7 @@ const UserProfile: FC<TUP> = ({ className, socials, user }) => {
             </a>
           ))}
         </div>
-        <div className={styles.note}>Member since Jan 1, 2023</div>
+        <div className={styles.note}>{createdAt(user.createdAt)}</div>
       </div>
       {/* <Modal
         visible={visibleModalReport}
