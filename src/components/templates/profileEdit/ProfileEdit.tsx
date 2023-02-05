@@ -6,27 +6,28 @@ import {Control} from "../../modules/control";
 import {TextInput} from "../../modules/textInput";
 import {TextArea} from "../../modules/textArea";
 import {Icon} from "../../modules/icon";
+import { IProfileEdit } from "./types";
 import axios from "axios";
 
-const breadcrumbs = [
-  {
-    title: "Profile",
-    url: "/profile",
-  },
-  {
-    title: "Edit Profile",
-  },
-];
-
-const ProfileEdit:FC = () => {
-  const [name, setName] = useState<string>("");
-  const [bio, setBio] = useState<string>("");
-  const [facebook, setFacebook] = useState<string>("");
-  const [twitter, setTwitter] = useState<string>("");
-  const [instagram, setInstagram] = useState<string>("");
+const ProfileEdit: FC<IProfileEdit> = ({ user }) => {
+  const [name, setName] = useState<string>(user.name);
+  const [bio, setBio] = useState<string>(user.bio);
+  const [facebook, setFacebook] = useState<string>(user.facebook);
+  const [twitter, setTwitter] = useState<string>(user.twitter);
+  const [instagram, setInstagram] = useState<string>(user.instagram);
 
   const router = useRouter();
   const { id } = router.query;
+
+  const breadcrumbs = [
+    {
+      title: "Profile",
+      url: `/profile/${id}`,
+    },
+    {
+      title: "Edit Profile",
+    },
+  ];
 
   const handleUpdateProfile = async () => {
     try {
