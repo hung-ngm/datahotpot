@@ -73,7 +73,7 @@ const ProfileEdit: FC<IProfileEdit> = ({ user }) => {
             <div className={styles.col}>
               <div className={styles.user}>
                 <div className={styles.avatar}>
-                  <img src="/images/content/avatar-1.jpg" alt="Avatar" />
+                  <img src={user.avatar ? user.avatar : "/images/content/avatar-1.jpg"} alt="Avatar" />
                 </div>
                 <div className={styles.details}>
                   <div className={styles.stage}>Profile photo</div>

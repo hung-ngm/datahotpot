@@ -170,6 +170,7 @@ const followers = [
 const Profile: FC<IProfile> = ({ myDataNFTs, user }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [visible, setVisible] = useState(false);
+  console.log('profile user', user);
 
   const socials = [
     {
