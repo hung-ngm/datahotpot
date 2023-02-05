@@ -183,8 +183,6 @@ const followers = [
 ];
 
 const Profile: FC<IProfile> = ({ myDataNFTs, user }) => {
-  console.log('myDataNFTs', myDataNFTs);
-  console.log('user', user);
   const [activeIndex, setActiveIndex] = useState(0);
   const [visible, setVisible] = useState(false);
   

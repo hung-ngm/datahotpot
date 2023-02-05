@@ -1,5 +1,6 @@
-import { FC, ReactNode, useState } from 'react';
+import { FC, ReactNode, useState, useEffect } from 'react';
 import Head from 'next/head';
+import { useSession } from 'next-auth/react';
 import { Header } from '../modules/header';
 
 const Layout: FC<{ children: ReactNode }> = ({ children }) => {

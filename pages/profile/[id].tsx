@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useRouter } from 'next/router';
-import { GetServerSideProps, NextPage } from 'next';
-import axios from 'axios';
+import { NextPage } from 'next';
 import { Layout } from '../../src/components/layout';
 import { Profile } from '../../src/components/templates/profile';
 import { useSession, getSession } from "next-auth/react";
@@ -53,7 +52,6 @@ export const getServerSideProps = async ({ params } : any) => {
 const ProfilePage: NextPage<IProfile> = ({ user }) => {
     const { data: session } = useSession();
     const [myDataNFTs, setMyDataNFTs] = useState<TNFTItem[]>();
-    const [userProfile, setUserProfile] = useState<TUser>();
     const router = useRouter();
 
     const loadMyNFTs = async () => {
@@ -68,18 +66,11 @@ const ProfilePage: NextPage<IProfile> = ({ user }) => {
         }
     }
 
-    // const loadUserProfile = async () => {
-    //     const userId = session?.user.uid;
-    //     const userProfile = await axios.get(`/api/profile/${userId}`);
-    //     console.log('userProfile', userProfile);
-    //     setUserProfile(userProfile.data);
-    // }
-
     useEffect(() => {
         if (!session) {
             router.push('/login');
         }
-        if (myDataNFTs && userProfile) {
+        if (myDataNFTs) {
             return;
         }
         loadMyNFTs();
