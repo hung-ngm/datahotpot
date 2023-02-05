@@ -21,21 +21,6 @@ const navLinks = [
 //   "Followers",
 ];
 
-const socials = [
-  {
-    title: "twitter",
-    url: "https://twitter.com/ui8",
-  },
-  {
-    title: "instagram",
-    url: "https://www.instagram.com/ui8net/",
-  },
-  {
-    title: "facebook",
-    url: "https://www.facebook.com/ui8.net/",
-  },
-];
-
 const following = [
   {
     name: "Sally Fadel",
@@ -185,6 +170,21 @@ const followers = [
 const Profile: FC<IProfile> = ({ myDataNFTs, user }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [visible, setVisible] = useState(false);
+
+  const socials = [
+    {
+      title: "twitter",
+      url: user.twitter ? user.twitter : "https://twitter.com/home",
+    },
+    {
+      title: "instagram",
+      url: user.instagram ? user.instagram : "https://www.instagram.com/",
+    },
+    {
+      title: "facebook",
+      url: user.facebook ? user.facebook : "https://www.facebook.com/",
+    },
+  ];
   
   return (
     <div className={styles.profile}>
@@ -231,7 +231,7 @@ const Profile: FC<IProfile> = ({ myDataNFTs, user }) => {
         <div className={cn("container", styles.container)}>
           <UserProfile 
             className={styles.user} 
-            item={socials} 
+            socials={socials} 
             user={user}
           />
           <div className={styles.wrapper}>

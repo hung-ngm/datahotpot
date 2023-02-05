@@ -21,4 +21,4 @@ export default async function handler(req: any, res: any) {
         .status(405)
         .json({ message: `HTTP method ${req.method} is not supported.` });
     }
-  }
+}

@@ -1,12 +1,11 @@
 export type TUser = {
     id: string;
-    name: string | undefined;
+    name: string;
     address: string; // Wallet address of user
-    avatar: string | undefined;
-    bio: string | undefined;
-    facebook: string | undefined;
-    twitter: string | undefined;
-    instagram: string | undefined;
+    avatar: string;
+    bio: string;
+    facebook: string;
+    twitter: string;
+    instagram: string;
     createdAt: string;
-
 }

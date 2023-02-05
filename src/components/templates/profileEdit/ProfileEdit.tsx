@@ -1,22 +1,51 @@
-import React, {FC} from "react";
+import React, { FC , useState } from "react";
+import { useRouter } from "next/router";
 import cn from "classnames";
 import styles from "./ProfileEdit.module.sass";
 import {Control} from "../../modules/control";
 import {TextInput} from "../../modules/textInput";
 import {TextArea} from "../../modules/textArea";
 import {Icon} from "../../modules/icon";
+import { IProfileEdit } from "./types";
+import axios from "axios";
 
-const breadcrumbs = [
-  {
-    title: "Profile",
-    url: "/profile",
-  },
-  {
-    title: "Edit Profile",
-  },
-];
+const ProfileEdit: FC<IProfileEdit> = ({ user }) => {
+  const [name, setName] = useState<string>(user.name);
+  const [bio, setBio] = useState<string>(user.bio);
+  const [facebook, setFacebook] = useState<string>(user.facebook);
+  const [twitter, setTwitter] = useState<string>(user.twitter);
+  const [instagram, setInstagram] = useState<string>(user.instagram);
 
-const ProfileEdit:FC = () => {
+  const router = useRouter();
+  const { id } = router.query;
+
+  const breadcrumbs = [
+    {
+      title: "Profile",
+      url: `/profile/${id}`,
+    },
+    {
+      title: "Edit Profile",
+    },
+  ];
+
+  const handleUpdateProfile = async () => {
+    try {
+      const data = {
+        name,
+        bio,
+        facebook,
+        twitter,
+        instagram
+      }
+  
+      const res = await axios.put(`/api/profile-edit/${id}`, data);
+      console.log('update profile res', res);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div className={styles.page}>
       <Control className={styles.control} item={breadcrumbs} />
@@ -68,27 +97,21 @@ const ProfileEdit:FC = () => {
                       label="display name"
                       name="Name"
                       type="text"
-                      value="name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
                       placeholder="Enter your display name"
                       required
                     />
-                    <TextInput
-                      className={styles.field}
-                      label="Custom url"
-                      name="Url"
-                      type="text"
-                      value="Url"
-                      placeholder="ui8.net/Your custom URL"
-                      required
-                    />
+                    
                     <TextArea
                       className={styles.field}
                       label="Bio"
                       name="Bio"
                       type="text"
                       placeholder="About yourselt in a few words"
+                      value={bio}
+                      onChange={(e) => setBio(e.target.value)}
                       required
-                      value="Bio"
                     />
                   </div>
                 </div>
@@ -97,50 +120,53 @@ const ProfileEdit:FC = () => {
                   <div className={styles.fieldset}>
                     <TextInput
                       className={styles.field}
-                      label="portfolio or website"
-                      name="Portfolio"
+                      label="Facebook"
+                      name="Facebook"
                       type="text"
-                      value="Portfolio"
-                      placeholder="Enter URL"
-                      required
+                      placeholder="Enter Facebook profile"
+                      value={facebook}
+                      onChange={(e) => setFacebook(e.target.value)}
+                      required={false}
                     />
-                    <div className={styles.box}>
-                      <TextInput
-                        className={styles.field}
-                        label="twitter"
-                        name="Twitter"
-                        type="text"
-                        value="Twitter"
-                        placeholder="@twitter username"
-                        required
-                      />
-                      <button
-                        className={cn(
-                          "button-stroke button-small",
-                          styles.button
-                        )}
-                      >
-                        Verify account
-                      </button>
-                    </div>
+                    <TextInput
+                      className={styles.field}
+                      label="twitter"
+                      name="Twitter"
+                      type="text"
+                      placeholder="Enter Twitter profile"
+                      value={twitter}
+                      onChange={(e) => setTwitter(e.target.value)}
+                      required={false}
+                    /> 
+                    <TextInput
+                      className={styles.field}
+                      label="Instagram"
+                      name="Instagram"
+                      type="text"
+                      placeholder="Enter Instagram profile"
+                      value={instagram}
+                      onChange={(e) => setInstagram(e.target.value)}
+                      required={false}
+                    /> 
+                    
                   </div>
-                  <button
-                    className={cn("button-stroke button-small", styles.button)}
-                  >
-                    <Icon name="plus-circle" size="16" />
-                    <span>Add more social account</span>
-                  </button>
+                  
                 </div>
               </div>
-              <div className={styles.note}>
-                To update your settings you should sign message through your
-                wallet. Click Update profile then sign the message
-              </div>
+              
               <div className={styles.btns}>
-                <button className={cn("button", styles.button)}>
+                <button 
+                  className={cn("button", styles.button)}
+                  onClick={async () => {
+                    await handleUpdateProfile();
+                  }}
+                >
                   Update Profile
                 </button>
-                <button className={styles.clear}>
+                <button
+                  className={styles.clear}
+                  
+                >
                   <Icon name="circle-close" size="24" />
                   Clear all
                 </button>

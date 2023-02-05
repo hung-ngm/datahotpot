@@ -9,8 +9,7 @@ import { FacebookShareButton, TwitterShareButton } from "react-share";
 import {TUP} from "./types";
 import { walletAddressShorterner } from "../../../../utils/walletAddressShorterner";
 
-
-const UserProfile: FC<TUP> = ({ className, item, user }) => {
+const UserProfile: FC<TUP> = ({ className, socials, user }) => {
   return (
     <>
       <div className={cn(styles.user, className)}>
@@ -25,20 +24,11 @@ const UserProfile: FC<TUP> = ({ className, item, user }) => {
           </button>
         </div>
         <div className={styles.info}>
-          A wholesome farm owner in Montana. Upcoming gallery solo show in
-          Germany
+          {user.bio ? user.bio : "Edit your bio in edit profile"}
         </div>
-        <a
-          className={styles.site}
-          href="https://ui8.net"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Icon name="globe" size="16" />
-          <span>https://ui8.net</span>
-        </a>
+
         <div className={styles.socials}>
-          {item.map((x, index) => (
+          {socials.map((x, index) => (
             <a
               className={styles.social}
               href={x.url}
