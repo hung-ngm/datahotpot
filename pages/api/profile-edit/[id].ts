@@ -10,7 +10,7 @@ export default async function handler(req: any, res: any) {
                 avatar, 
                 twitter,
                 instagram,
-                facebook 
+                facebook,
             } = req.body;
             const user = await prisma.user.update({
                 where: { id },
