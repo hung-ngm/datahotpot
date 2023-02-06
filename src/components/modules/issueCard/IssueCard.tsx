@@ -16,7 +16,7 @@ const IssueCard: FC<TIssueCard> = ({ issue }) => {
 
   return (
     <div>
-      <CustomLink className={styles.preview} href="/">
+      <CustomLink className={styles.preview} href={`/issue-details/${issue.id}`}>
         <div className={styles.body}>
           <div className={styles.line}>
           <div className={styles.title}>{issue.title}</div>

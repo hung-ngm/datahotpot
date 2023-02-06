@@ -7,12 +7,12 @@ import { TIssues } from "./types";
 
 const Issue: FC<TIssues> = ({ issues }) => {
   const [search, setSearch] = useState("");
-
+  console.log('issues page', issues);
   return (
     <div className={cn("section-pt80", styles.section)}>
       <div className={cn("container", styles.container)}>
         <div className={styles.top}>
-          <div className={styles.title}>Find Your Datasets</div>
+          <div className={styles.title}>Find people who need datasets</div>
           <form
             className={styles.search}
             action=""
