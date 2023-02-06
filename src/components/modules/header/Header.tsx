@@ -37,7 +37,6 @@ const Header: FC = () => {
           <Image
             className={styles.pic}
             src="/images/logo-dark.png"
-            srcDark="/images/logo-light.png"
             alt="Datahotpot"
           />
         </CustomLink>
