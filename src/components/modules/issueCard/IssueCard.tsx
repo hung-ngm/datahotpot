@@ -9,6 +9,8 @@ import { Icon } from "../icon";
 import Interpunct from "react-interpunct";
 import { TIssueCard } from "./types";
 import useUserByUid from "../../../hooks/useUserByUid";
+import { updatedAt } from "../../../../utils/updatedAt";
+import { issuePreviewShorterner } from "../../../../utils/issuePreviewShorterner";
 
 const IssueCard: FC<TIssueCard> = ({ issue }) => {
   const tags = issue.categories.map((category) => category.name);
@@ -21,22 +23,20 @@ const IssueCard: FC<TIssueCard> = ({ issue }) => {
           <div className={styles.line}>
           <div className={styles.title}>{issue.title}</div>
           <div className={styles.details}>
-            {issue.requirements}
+            {issuePreviewShorterner(issue.requirements)}
           </div>
         
           <div className={styles.foot}>
             <div className = {styles.line2}>
-              <div className={styles.author}>
-                <div className={styles.avatar}>
+              <div className={styles.author}>{author?.name ? author.name : "Unnamed"}</div>
+              <Interpunct/>
+              <div className={styles.updatedAt}>{updatedAt(issue.updatedAt)}</div>
+            </div>
+              <div className={styles.avatar}>
                   <img 
                     src={author?.avatar ? author.avatar : "/images/content/avatar-1.jpg" }
                     alt="Avatar" />
-                </div> 
               </div>
-              <Interpunct/>
-              
-            </div>
-            
           </div>
           <div className={styles.tags}>
             {tags.map((tag: string, index: number) => 

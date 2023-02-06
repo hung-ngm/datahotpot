@@ -6,7 +6,7 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
     return (
         <>  
             <Head>
-                <title>Crypter NFT</title>
+                <title>Datahotpot</title>
                 <meta
                     content="Epic Dataset Marketplace"
                     name="description" />
