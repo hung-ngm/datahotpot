@@ -36,7 +36,7 @@ const Header: FC = () => {
         <CustomLink className={styles.logo} href="/">
           {/* <Image
             className={styles.pic}
-            src="/images/logo-dark.png"
+            src="/images/Datahotpot.png"
             alt="Datahotpot"
           /> */}
           <h3>DATAHOTPOT</h3>
