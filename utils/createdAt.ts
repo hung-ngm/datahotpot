@@ -10,5 +10,3 @@ export const createdAt = (date: string | null | undefined) : string => {
    const res = "Member since " + month + " " + day + ", " + year;
    return res;
 }
-
-//"2023-02-04T07:23:40.496Z"
