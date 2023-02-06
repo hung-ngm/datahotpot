@@ -78,12 +78,12 @@ const UploadIssueDetails:FC = () => {
         title, 
         requirements, 
         criteria, 
-        author
+        tags
       } 
       console.log(data);
-      const res = await axios.post('/api/issue', data)
+      const res = await axios.post('/api/issues', data)
       console.log("upload successfully", res);
-      router.push('/issue')
+      router.push('/issues')
     } catch (err) {
       console.log("errr",err);
     }

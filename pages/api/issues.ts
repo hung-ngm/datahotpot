@@ -8,7 +8,7 @@ export default async function handler(
 ) {
     if (req.method === 'POST') {
         try {
-            const {title, requirements, criteria, author, tags} = req.body;
+            const {title, requirements, criteria, tags} = req.body;
             const categories = tags.map((tag: any) => {
                 return {name: tag.label}
             });
@@ -18,17 +18,21 @@ export default async function handler(
                 return;
             }
             const authorId = session.user.uid;
+            
             const result = await prisma.issue.create({
                 data: {
                     title,
                     requirements,
                     criteria,
-                    author,
-                    authorId,
+                    author: { connect: { id: authorId } },
                     categories: {
-                        create: categories
-                    }
-                },
+                        connectOrCreate: categories.map((category: any) => ({
+                            where: {name: category.name},
+                            create: {name: category.name}
+                        }))
+                    },  
+                }
+                
             });
             console.log(result);
             res.status(200).json(result);

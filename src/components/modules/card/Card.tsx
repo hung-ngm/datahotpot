@@ -42,7 +42,7 @@ const Card: FC<TCard> = ({ className, item, text, isBuy }) => {
         <div className={styles.foot}>
             <div className = {styles.line2}>
               <div className={styles.files}>{item.fileName}</div>
-              <Interpunct></Interpunct>
+              <Interpunct />
               <div className={styles.limitSize}>{getFileSize(item.fileSize)}</div>
             </div>
             <div className={styles.avatar}>
