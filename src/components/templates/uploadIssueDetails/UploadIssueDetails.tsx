@@ -1,28 +1,14 @@
 import React, { useState, FC } from "react";
 import cn from "classnames";
 import styles from "./UploadIssueDetails.module.sass";
-import {Dropdown} from "../../modules/dropdown";
 import {Icon} from "../../modules/icon";
 import {TextInput} from "../../modules/textInput";
 import {TextArea} from "../../modules/textArea";
-import {Loader} from "../../modules/loader";
-import {Modal} from "../../modules/modal";
-import {Preview} from "../../modules/preview";
 import {Select} from "../../modules/select";
-import {FollowSteps} from "../../modules/followSteps";
-import { SelectOption, TRoyaltiesMap } from "./types";
+import { SelectOption } from "./types";
 import {useRouter} from 'next/router';
+import { Button } from "../../modules/button";
 import axios from 'axios';
-
-
-const royaltiesOptions = ["2%", "5%", "10%"];
-
-// Use number in Solidity smart contracts
-const royaltiesMap: TRoyaltiesMap = {
-  "2%": 200,
-  "5%": 500,
-  "10%": 1000,
-}
 
 const options = [
   { label: "Music", value: 1 },
@@ -38,40 +24,17 @@ const UploadIssueDetails:FC = () => {
   const [criteria, setCriteria] = useState<string>("");
   const [tags, setTags] = useState<SelectOption[]>([]);
 
-  const author = "oke";
-
   const router = useRouter();
 
   const [visibleModal, setVisibleModal] = useState(false);
   const [visiblePreview, setVisiblePreview] = useState(false);
-  const [price, setPrice] = useState<string>("");
-  const [royalties, setRoyalties] = useState<string>(royaltiesOptions[0]);
-  
-  // Used in lighthouse upload
-  const [dataUrl, setDataUrl] = useState<string>("");
-  const [dataSize, setDataSize] = useState<number>();
 
-  // Used in web3 storage metadata upload
-  const [metadataUrl, setMetadataUrl] = useState<string>("");
-  const [thumbnailUrl, setThumbnailUrl] = useState<string>("");
-  
-  // const handleCreateItem = async () => {
-  //   setVisibleModal(true);
-  //   const metadataUrl = await storeMetadata(
-  //     dataName, 
-  //     dataContext, 
-  //     dataContains, 
-  //     sources, 
-  //     tags,
-  //     thumbnailUrl
-  //   );
-  //   console.log('Store metadata with url', metadataUrl);
-  //   if (metadataUrl) {
-  //     setMetadataUrl(metadataUrl);
-  //   }
-  // }
+  const [uploadingLoading, setUploadLoading] = useState<boolean>(false);
+  const [uploadSuccess, setUploadSuccess] = useState<boolean>(false);
 
+  
   const submitData = async (e: React.SyntheticEvent) => {
+    setUploadLoading(true);
     e.preventDefault()
     try {
       const data = {
@@ -83,9 +46,13 @@ const UploadIssueDetails:FC = () => {
       console.log(data);
       const res = await axios.post('/api/issues', data)
       console.log("upload successfully", res);
+      setUploadLoading(false);
+      setUploadSuccess(true);
       router.push('/issues')
     } catch (err) {
       console.log("errr",err);
+      setUploadLoading(false);
+      setUploadSuccess(false);
     }
   }
 
@@ -96,10 +63,10 @@ const UploadIssueDetails:FC = () => {
           <div className={styles.wrapper}>
             <div className={styles.head}>
               <div className={cn("h2", styles.title)}>
-                Create issue collectible
+                Create issue
               </div>
             </div>
-            <form className={styles.form} onSubmit={submitData}>
+            <form className={styles.form}>
               <div className={styles.list}>
                 <div className={styles.item}>
                   <div className={styles.category}>Issue Details</div>
@@ -156,38 +123,18 @@ const UploadIssueDetails:FC = () => {
                 >
                   Preview
                 </button>
-                <button
-                  className={cn("button", styles.button)}
-                  // onClick={async () => { 
-                  //   await handleCreateItem();
-                  // }}
-                  type="submit"
-                >
-                  <span>Create Issue</span>
-                  <Icon name="arrow-next" size="10" />
-                </button>
+                <Button
+                  loading={uploadingLoading}
+                  success={uploadSuccess}
+                  disabled={false}
+                  name="Create Issue"
+                  onClick={async (e) => { await submitData(e)}}
+                />
               </div>
             </form>
           </div>
-          <Preview
-            className={cn(styles.preview, { [styles.active]: visiblePreview })}
-            onClose={() => setVisiblePreview(false)}
-            dataName = {title}
-            price = {price}
-            thumbnailUrl = {thumbnailUrl}
-            dataSize = {dataSize}
-          />
         </div>
       </div>
-      <Modal visible={visibleModal} onClose={() => setVisibleModal(false)}>
-        <FollowSteps
-          className={styles.steps}
-          dataUrl={dataUrl}
-          metadata={metadataUrl}
-          feeNumerator={royaltiesMap[royalties]}
-          price={Number(price)}
-        />
-      </Modal>
     </>
   );
 };
