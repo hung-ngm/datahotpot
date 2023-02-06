@@ -1,46 +1,16 @@
 import type { NextPage } from 'next'
 import { Layout } from '../src/components/layout'
-import styles from "../src/components/mock/card-test.module.sass";
-import { signOut, useSession } from "next-auth/react";
-import { useDisconnect } from "wagmi";
+import { Home } from '../src/components/templates/home';
+import useDataNFTs from '../src/hooks/useDataNFTs';
 
-const Home: NextPage = () => {
-  const { data: session, status } = useSession();
-  const loading = status === "loading";
-  const { disconnect } = useDisconnect();
+const HomePage: NextPage = () => {
+  const dataNFTs = useDataNFTs();
 
   return (
     <Layout>
-      {!session && (
-        <>
-          <span>
-            You are not signed in
-          </span>
-        </>
-      )}
-      {session?.user && (
-        <>
-          
-          <span className={styles.signedInText}>
-            <small>Signed in as</small>
-            <br />
-            <strong>{session.user.email ?? session.user.name}</strong>
-          </span>
-          <a
-            href={`/api/auth/signout`}
-            className={styles.button}
-            onClick={(e) => {
-              e.preventDefault()
-              disconnect()
-              signOut()
-            }}
-          >
-            Sign out
-          </a>
-        </>
-      )}
+      <Home dataNFTs={dataNFTs} />
     </Layout>
   )
 }
 
-export default Home
+export default HomePage
