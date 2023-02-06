@@ -1,5 +1,4 @@
 import {prisma} from '../../lib/prismadb';
-import { NextApiRequest, NextApiResponse } from 'next/types';
 import {getSession} from 'next-auth/react';
 
 
@@ -9,14 +8,26 @@ export default async function handler(
 ) {
     if (req.method === 'POST') {
         try {
-            const {title, requirements, criteria, author} = req.body;
+            const {title, requirements, criteria, author, tags} = req.body;
+            const categories = tags.map((tag: any) => {
+                return {name: tag.label}
+            });
             const session = await getSession({req});
+            if (!session) {
+                res.status(401).json({message: 'Unauthorized'});
+                return;
+            }
+            const authorId = session.user.uid;
             const result = await prisma.issue.create({
                 data: {
                     title,
                     requirements,
                     criteria,
-                    author
+                    author,
+                    authorId,
+                    categories: {
+                        create: categories
+                    }
                 },
             });
             console.log(result);

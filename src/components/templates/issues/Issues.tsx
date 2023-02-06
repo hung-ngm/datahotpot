@@ -1,13 +1,14 @@
 import React, { useState, FC } from "react";
 import cn from "classnames";
-import styles from "./Issue.module.sass";
+import styles from "./Issues.module.sass";
 import { Icon } from "../../modules/icon";
 import { IssueCard } from "../../modules/issueCard";
 import { TIssues } from "./types";
 
-const Issue: FC = () => {
+const Issue: FC<TIssues> = ({ issues }) => {
+  
 
-  //console.log(issues);
+  console.log('issues page', issues);
   const [search, setSearch] = useState("");
 
   return (

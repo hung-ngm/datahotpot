@@ -14,8 +14,8 @@ const nav = [
       title: "Discover",
     },
     {
-      url: "/issue",
-      title: "Issue",
+      url: "/issues",
+      title: "Issues",
     },
 ];
 
