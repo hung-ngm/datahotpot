@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import { FC, useState } from "react";
@@ -11,13 +12,17 @@ import { signOut } from "next-auth/react";
 import { useDisconnect } from "wagmi";
 import { walletAddressShorterner } from "../../../../../utils/walletAddressShorterner";
 import useUserProfile from "../../../../hooks/useUserProfile";
+import useUserBalance from "../../../../hooks/useUserBalance";
+import { getUserBalance } from "../../../../../utils/getUserBalance";
 
 const User: FC<TU> = ({ className }) => {
   const [visible, setVisible] = useState(false);
   const { disconnect } = useDisconnect();
-
   const userProfile = useUserProfile();
- 
+  
+  const balance = useUserBalance();
+  const balanceShort = getUserBalance(balance);
+  
   return (
     <OutsideClickHandler onOutsideClick={() => setVisible(false)}>
       {userProfile && (
@@ -27,7 +32,7 @@ const User: FC<TU> = ({ className }) => {
             <img src={userProfile.avatar ? userProfile.avatar : "/images/content/avatar-user.jpg"} alt="Avatar" />
           </div>
           <div className={styles.wallet}>
-            7.00698 <span className={styles.currency}>ETH</span>
+            {balanceShort} <span className={styles.currency}>FIL</span>
           </div>
         </div>
         {visible && (
@@ -51,7 +56,7 @@ const User: FC<TU> = ({ className }) => {
                 </div>
                 <div className={styles.details}>
                   <div className={styles.info}>Balance</div>
-                  <div className={styles.price}>4.689 ETH</div>
+                  <div className={styles.price}>{balanceShort} FIL</div>
                 </div>
               </div>
               <button
