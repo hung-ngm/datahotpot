@@ -6,16 +6,13 @@ import { IssueCard } from "../../modules/issueCard";
 import { TIssues } from "./types";
 
 const Issue: FC<TIssues> = ({ issues }) => {
-  
-
-  console.log('issues page', issues);
   const [search, setSearch] = useState("");
-
+  console.log('issues page', issues);
   return (
     <div className={cn("section-pt80", styles.section)}>
       <div className={cn("container", styles.container)}>
         <div className={styles.top}>
-          <div className={styles.title}>Find Your Datasets</div>
+          <div className={styles.title}>Find people who need datasets</div>
           <form
             className={styles.search}
             action=""
@@ -42,8 +39,7 @@ const Issue: FC<TIssues> = ({ issues }) => {
                   <div>All Categories</div>
                 </div>
                 <div>
-                    <IssueCard/>
-                    <IssueCard/>
+                  {issues.map((issue, index) => <IssueCard key={index} issue={issue} />)}
                 </div>
             <div className={styles.btns}>
               <button className={cn("button-stroke", styles.button)}>
