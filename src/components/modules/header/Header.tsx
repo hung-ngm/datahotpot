@@ -34,11 +34,12 @@ const Header: FC = () => {
     <header className={styles.header}>
       <div className={cn("container", styles.container)}>
         <CustomLink className={styles.logo} href="/">
-          <Image
+          {/* <Image
             className={styles.pic}
             src="/images/logo-dark.png"
             alt="Datahotpot"
-          />
+          /> */}
+          <h3>DATAHOTPOT</h3>
         </CustomLink>
         <div className={cn(styles.wrapper, { [styles.active]: visibleNav })}>
           <nav className={styles.nav}>

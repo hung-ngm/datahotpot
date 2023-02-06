@@ -8,16 +8,16 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
             <Head>
                 <title>Crypter NFT</title>
                 <meta
-                    content="Epic NFT Marketplace UI Design Kit"
+                    content="Epic Dataset Marketplace"
                     name="description" />
-                <meta content="Crypter - NFT Marketplace UI Kit" property="og:title" />
+                <meta content="Datahotpot - Dataset Marketplace" property="og:title" />
                 <meta
-                    content="Epic NFT Marketplace UI Design Kit"
+                    content="Epic Dataset Marketplace"
                     property="og:description" />
                 <meta content="%PUBLIC_URL%/fb-og-image.png" property="og:image" />
                 <meta property="og:url" content="https://ui8.net/ui8/products/crypter-nft-marketplace-ui-kit" />
                 <meta property="og:site_name" content="crypter-nft-marketplace-ui-kit" />
-                <meta content="Crypter - NFT Marketplace UI Kit" property="twitter:title" />
+                <meta content="Datahotpot - Dataset Marketplace" property="twitter:title" />
                 <meta
                     content="Premium Web UI Kit for Fitness Experience"
                     property="twitter:description" />
