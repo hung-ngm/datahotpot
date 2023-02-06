@@ -57,6 +57,9 @@ CREATE UNIQUE INDEX "Session_sessionToken_key" ON "Session"("sessionToken");
 CREATE UNIQUE INDEX "User_address_key" ON "User"("address");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Category_name_key" ON "Category"("name");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "_CategoryToIssue_AB_unique" ON "_CategoryToIssue"("A", "B");
 
 -- CreateIndex

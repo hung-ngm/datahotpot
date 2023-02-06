@@ -1,0 +1,1 @@
+export {default as UploadIssueDetails} from "./UploadIssueDetails"

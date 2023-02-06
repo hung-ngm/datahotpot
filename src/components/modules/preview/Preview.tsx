@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, {FC} from "react";
 import cn from "classnames";
 import styles from "./Preview.module.sass";
@@ -31,7 +32,7 @@ const Preview: FC<TPreview> = ({ className, onClose, dataName, price, thumbnailU
             <div className={styles.foot}>
               <div className = {styles.line2}>
                   <div className={styles.files}>1 file (CSV)</div>
-                  <Interpunct> </Interpunct>
+                  <Interpunct /> 
                   <div className={styles.limitSize}>{dataSize} MB</div>
               </div>
               <div className={styles.avatar}>
