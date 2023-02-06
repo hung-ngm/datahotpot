@@ -1,14 +1,5 @@
-export interface TIssues {
-    issues : Array<Issue>
-}
+import { TIssue } from "../../../../types/issue"
 
-type Issue = {
-    id: string,
-    title: string,
-    requirements: string,
-    criteria: string,
-    createdAt: string,
-    updatedAt: string,
-    authorId: string,
-    author: string
+export interface TIssues {
+    issues : TIssue[]
 }

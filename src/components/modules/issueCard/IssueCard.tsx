@@ -7,39 +7,44 @@ import { CustomLink } from "../customLink/index";
 import styles from "./IssueCard.module.sass";
 import { Icon } from "../icon";
 import Interpunct from "react-interpunct";
+import { TIssueCard } from "./types";
+import useUserByUid from "../../../hooks/useUserByUid";
 
-const IssueCard: FC = () => {
-  const item = {
-    tags : ['Music', 'Movie', 'NLP']
-  }
+const IssueCard: FC<TIssueCard> = ({ issue }) => {
+  const tags = issue.categories.map((category) => category.name);
+  const author = useUserByUid(issue.authorId);
 
   return (
     <div>
       <CustomLink className={styles.preview} href="/">
         <div className={styles.body}>
           <div className={styles.line}>
-          <div className={styles.title}>ABC</div>
-          <div className={styles.details}> The dataset has been acquired from data.gov.in
-It shows the number of visitors who visited the central monuments between 2019 and 2021.</div>
-          
+          <div className={styles.title}>{issue.title}</div>
+          <div className={styles.details}>
+            {issue.requirements}
+          </div>
         
-            <div className={styles.foot}>
-              <div className = {styles.line2}>
-                <div className={styles.author}>Hung Nguyen</div>
-                <Interpunct/>
-                <div className={styles.updatedAt}>Updated 6 days ago</div>
+          <div className={styles.foot}>
+            <div className = {styles.line2}>
+              <div className={styles.author}>
+                <div className={styles.avatar}>
+                  <img 
+                    src={author?.avatar ? author.avatar : "/images/content/avatar-1.jpg" }
+                    alt="Avatar" />
+                </div> 
               </div>
-              <div className={styles.avatar}>
-                <img src="/images/content/avatar-1.jpg" alt="Avatar" />
-              </div> 
+              <Interpunct/>
+              
             </div>
-            <div className={styles.tags}>
-              {item.tags.map((tag: string, index: number) => 
-                <div key={index} className={cn("status-purple", styles.tag)}>
-                  #{tag}
-                </div>
-              )}
-            </div>
+            
+          </div>
+          <div className={styles.tags}>
+            {tags.map((tag: string, index: number) => 
+              <div key={index} className={cn("status-purple", styles.tag)}>
+                #{tag}
+              </div>
+            )}
+          </div>
           </div>
         </div>
       </CustomLink>

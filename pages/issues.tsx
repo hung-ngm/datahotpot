@@ -4,7 +4,7 @@ import { Layout } from '../src/components/layout';
 import { Issues } from '../src/components/templates/issues';
 import { useSession, getSession } from "next-auth/react";
 import {prisma} from '../lib/prismadb';
-import { TIssue } from '../types/issue';
+import { TIssues } from '../src/components/templates/issues/types';
 
 export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
     const session = await getSession({ req });
@@ -13,14 +13,15 @@ export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
         return { props: { issues: [] } };
     }
 
-    const issues = await prisma.issue.findMany();
+    const issues = await prisma.issue.findMany({
+        include: {
+            categories: true
+        }
+    });
+
     return {
         props: { issues: JSON.parse(JSON.stringify(issues)) },
     }
-}
-
-type TIssues = {
-    issues: TIssue[];
 }
 
 const IssuePage: NextPage<TIssues> = ({ issues }) => {

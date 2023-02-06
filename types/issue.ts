@@ -7,4 +7,10 @@ export type TIssue = {
     updatedAt: string,
     authorId: string,
     author: string
+    categories: TCategory[],
+}
+
+export type TCategory = {
+    id: number;
+    name: string;
 }

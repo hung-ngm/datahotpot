@@ -6,9 +6,6 @@ import { IssueCard } from "../../modules/issueCard";
 import { TIssues } from "./types";
 
 const Issue: FC<TIssues> = ({ issues }) => {
-  
-
-  console.log('issues page', issues);
   const [search, setSearch] = useState("");
 
   return (
@@ -42,8 +39,7 @@ const Issue: FC<TIssues> = ({ issues }) => {
                   <div>All Categories</div>
                 </div>
                 <div>
-                    <IssueCard/>
-                    <IssueCard/>
+                  {issues.map((issue, index) => <IssueCard key={index} issue={issue} />)}
                 </div>
             <div className={styles.btns}>
               <button className={cn("button-stroke", styles.button)}>
