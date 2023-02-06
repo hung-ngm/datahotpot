@@ -1,7 +1,6 @@
 import React, { useState, FC } from "react";
 import cn from "classnames";
 import styles from "./Discover.module.sass";
-import { Range, getTrackBackground } from "react-range";
 import { Icon } from "../../modules/icon";
 import { Card } from "../../modules/card";
 import Slider from "react-slick";
@@ -18,14 +17,8 @@ const categoryOptions = ["Music", "Movie", "University", "Education", "NLP"];
 const creatorOptions = ["Verified only", "All", "Most liked"];
 
 const Discovery: FC<IDiscovery> = ({ dataNFTs }) => {
-  const [date, setDate] = useState(dateOptions[0]);
-  const [likes, setLikes] = useState(likesOptions[0]);
-  const [category, setCategory] = useState(categoryOptions[0]);
-  const [creator, setCreator] = useState(creatorOptions[0]);
 
   const [search, setSearch] = useState("");
-
-  const [values, setValues] = useState([5]);
 
   const handleSubmit = (e:string) => {
     alert();
@@ -35,10 +28,6 @@ const Discovery: FC<IDiscovery> = ({ dataNFTs }) => {
     const res = await buyNFT(item);
     console.log('buy res', res);
   }
-
-  const STEP = 0.1;
-  const MIN = 0.01;
-  const MAX = 10;
 
   //setting for slider show
   const settings = {

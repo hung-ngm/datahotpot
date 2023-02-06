@@ -34,7 +34,7 @@ const Header: FC = () => {
     <header className={styles.header}>
       <div className={cn("container", styles.container)}>
         <CustomLink className={styles.logo} href="/">
-          <Image
+        <Image
             className={styles.pic}
             src="/images/Datahotpot.png"
             alt="Datahotpot"
